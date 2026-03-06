@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Немецкий — A1 / A2 / B1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Shadcn v4 design tokens ── */
+:root {
+  --background:        oklch(1 0 0);
+  --foreground:        oklch(0.141 0.005 285.823);
+  --card:              oklch(1 0 0);
+  --card-foreground:   oklch(0.141 0.005 285.823);
+  --primary:           oklch(0.21 0.006 285.885);
+  --primary-fg:        oklch(0.985 0 0);
+  --secondary:         oklch(0.967 0.001 286.375);
+  --secondary-fg:      oklch(0.21 0.006 285.885);
+  --muted:             oklch(0.967 0.001 286.375);
+  --muted-fg:          oklch(0.552 0.016 285.938);
+  --accent:            oklch(0.967 0.001 286.375);
+  --accent-fg:         oklch(0.21 0.006 285.885);
+  --border:            oklch(0.92 0.004 286.32);
+  --input:             oklch(0.92 0.004 286.32);
+  --ring:              oklch(0.705 0.015 286.067);
+  --destructive:       oklch(0.577 0.245 27.325);
+  --radius:            0.625rem;
+}
+
+[data-theme="dark"] {
+  --background:        oklch(0.141 0.005 285.823);
+  --foreground:        oklch(0.985 0 0);
+  --card:              oklch(0.18 0.006 285.885);
+  --card-foreground:   oklch(0.985 0 0);
+  --primary:           oklch(0.985 0 0);
+  --primary-fg:        oklch(0.21 0.006 285.885);
+  --secondary:         oklch(0.274 0.006 286.033);
+  --secondary-fg:      oklch(0.985 0 0);
+  --muted:             oklch(0.274 0.006 286.033);
+  --muted-fg:          oklch(0.62 0.016 285.938);
+  --accent:            oklch(0.274 0.006 286.033);
+  --accent-fg:         oklch(0.985 0 0);
+  --border:            oklch(1 0 0 / 0.10);
+  --input:             oklch(1 0 0 / 0.15);
+  --ring:              oklch(0.552 0.016 285.938);
+  --destructive:       oklch(0.704 0.191 22.216);
+  --shadow-card:       0 1px 6px rgb(0 0 0 / .35);
+}
+[data-theme="dark"] body {
+  background: var(--background);
+  color: var(--foreground);
+}
+[data-theme="dark"] .gm { color: oklch(0.70 0.14 250); }
+[data-theme="dark"] .gf { color: oklch(0.72 0.17 27);  }
+[data-theme="dark"] .gn { color: oklch(0.68 0.13 152); }
+[data-theme="dark"] .vf { color: oklch(0.72 0.15 250); }
+[data-theme="dark"] thead tr { background: var(--muted); }
+[data-theme="dark"] tbody tr:nth-child(even) { background: oklch(0.22 0.005 286 / 0.6); }
+[data-theme="dark"] .btn-outline {
+  border-color: var(--border);
+  color: var(--foreground);
+  background: transparent;
+}
+[data-theme="dark"] .btn-outline:hover { background: var(--accent); }
+[data-theme="dark"] .btn-secondary:hover { background: oklch(0.32 0.006 286.033); }
+
+
+[data-theme="dark"] aside {
+  background: oklch(0.17 0.005 285.823);
+  border-right-color: var(--border);
+}
+[data-theme="dark"] .mob-header {
+  border-bottom-color: var(--border);
+}
+[data-theme="dark"] .nav-overlay { background: rgb(0 0 0 / .6); }
+[data-theme="dark"] .page-header { border-bottom-color: var(--border); background: var(--background); }
+[data-theme="dark"] .level-sep-line { background: var(--border); }
+[data-theme="dark"] .nav-sep { color: var(--muted-fg); }
+[data-theme="dark"] details > summary { color: var(--muted-fg); }
+[data-theme="dark"] .card-2col > .card:first-child { border-right-color: var(--border); }
+[data-theme="dark"] td, [data-theme="dark"] th { border-color: var(--border); }
+[data-theme="dark"] .alert-warn {
+  background: oklch(0.22 0.04 85);
+  border-color: oklch(0.45 0.10 85);
+  color: oklch(0.85 0.10 85);
+}
+[data-theme="dark"] .alert-warn .alert-title { color: oklch(0.9 0.12 85); }
+[data-theme="dark"] .alert-info {
+  background: oklch(0.20 0.04 237);
+  border-color: oklch(0.40 0.10 237);
+  color: oklch(0.82 0.10 237);
+}
+[data-theme="dark"] .alert-info .alert-title { color: oklch(0.88 0.12 237); }
+
+
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.layout { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+aside {
+  width: 220px;
+  min-width: 220px;
+  border-right: 1px solid var(--border);
+  background: var(--background);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 24px 0 48px;
+  font-size: 12.5px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+aside h2 {
+  padding: 0 16px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+}
+aside ul { list-style: none; }
+aside ul li a {
+  display: block;
+  padding: 5px 16px;
+  color: var(--muted-fg);
+  text-decoration: none;
+  border-radius: 0;
+  transition: color .15s, background .15s;
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+aside ul li a:hover {
+  color: var(--foreground);
+  background: var(--accent);
+}
+.nav-sep {
+  padding: 12px 16px 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+}
+
+/* ── Main ── */
+main {
+  flex: 1;
+  min-width: 0;
+  max-width: 880px;
+  padding: 40px 40px 80px;
+}
+
+/* ── Page header ── */
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--background);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+  height: 48px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+.page-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: var(--foreground);
+  margin-right: auto;
+}
+.level-badges { display: none; }
+/* icon-only button variant */
+.btn-icon { width: 36px; height: 36px; padding: 0; flex-shrink: 0; }
+/* active-icon state for icon-only buttons */
+.btn-icon.active-icon { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+
+
+/* ── Shadcn Badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  padding: 2px 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.badge-default  { background: var(--primary); color: var(--primary-fg); }
+.badge-secondary{ background: var(--secondary); color: var(--secondary-fg); border-color: var(--border); }
+.badge-outline  { background: transparent; color: var(--foreground); border-color: var(--border); }
+.badge-num {
+  background: var(--secondary);
+  color: var(--muted-fg);
+  border-color: var(--border);
+  font-size: 10.5px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* ── Shadcn Button ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+  outline: none;
+  padding: 6px 14px;
+  height: 36px;
+  font-family: inherit;
+}
+.btn-outline {
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / .05);
+}
+.btn-outline:hover { background: var(--accent); color: var(--accent-fg); }
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--secondary-fg);
+  border: 1px solid transparent;
+}
+.btn-secondary:hover { background: oklch(0.95 0.001 286.375); }
+
+/* ── Level separator ── */
+.level-sep {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 40px 0 20px;
+}
+.level-sep-line { flex: 1; height: 1px; background: var(--border); }
+.level-sep-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  padding: 0 2px;
+}
+
+/* ── Shadcn Card ── */
+.card {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / .04), 0 1px 2px -1px rgb(0 0 0 / .04);
+  margin-bottom: 12px;
+  overflow: hidden;
+  scroll-margin-top: 24px;
+}
+.card-header {
+  padding: 20px 22px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--foreground);
+  flex: 1;
+}
+.card-title span.de {
+  font-weight: 400;
+  color: var(--muted-fg);
+  font-size: 12px;
+  margin-left: 6px;
+}
+.card-content { padding: 18px 22px; }
+.card-content > * + * { margin-top: 14px; }
+
+/* ── Shadcn Table ── */
+.tbl-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  caption-bottom: bottom;
+  font-size: 13px;
+  border-collapse: collapse;
+}
+thead tr { border-bottom: 1px solid var(--border); }
+thead th {
+  height: 36px;
+  padding: 0 10px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--foreground);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background .12s;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--muted); }
+td {
+  padding: 9px 10px;
+  vertical-align: top;
+  line-height: 1.55;
+}
+td strong, th strong { font-weight: 600; }
+td code {
+  font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: .85em;
+}
+
+/* ── Alert / Warn ── */
+.alert {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  font-size: 13px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.alert-warn { background: oklch(0.987 0.026 102); border-color: oklch(0.87 0.075 86); }
+.alert-info { background: oklch(0.975 0.013 237); border-color: oklch(0.84 0.046 237); }
+.alert-icon { font-size: 14px; line-height: 1.5; flex-shrink: 0; }
+.alert-body p { margin: 0; }
+.alert-body p + p { margin-top: 4px; }
+.alert-title { font-weight: 600; margin-bottom: 5px; font-size: 13px; }
+.alert ul { margin-left: 16px; margin-top: 4px; }
+.alert li { margin: 3px 0; }
+.alert em { font-style: italic; }
+
+/* Expandable details block */
+.detail-block { margin-top: 8px; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
+.detail-block summary {
+  cursor: pointer;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted-fg);
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--muted);
+  transition: background .15s;
+}
+.detail-block summary::-webkit-details-marker { display: none; }
+.detail-block summary::after { content: '▸'; margin-left: auto; font-size: 10px; transition: transform .2s; }
+.detail-block[open] summary::after { transform: rotate(90deg); }
+.detail-block summary:hover { background: var(--accent); }
+.detail-inner { padding: 10px 12px; border-top: 1px solid var(--border); }
+.detail-inner .tbl-wrap { margin-top: 6px; }
+.detail-inner .rule { margin-top: 8px; }
+.detail-inner .alert { margin-top: 8px; }
+
+/* haben/sein compact layout */
+.hs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hs-col { display: flex; flex-direction: column; gap: 0; }
+.hs-rule-cell {
+  border-radius: 6px;
+  padding: 7px 10px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.hs-sein  { background: oklch(0.95 0.03 145 / .5); border: 1px solid oklch(0.80 0.08 145); }
+.hs-haben { background: oklch(0.95 0.025 250 / .5); border: 1px solid oklch(0.80 0.06 250); }
+[data-theme="dark"] .hs-sein  { background: oklch(0.25 0.04 145 / .5); border-color: oklch(0.45 0.09 145); }
+[data-theme="dark"] .hs-haben { background: oklch(0.25 0.03 250 / .5); border-color: oklch(0.45 0.07 250); }
+.hs-aux  { font-size: 13px; font-weight: 700; }
+.hs-crit { font-size: 10.5px; color: var(--muted-fg); line-height: 1.4; }
+.hs-hint { font-size: 9.5px; opacity: .75; font-style: italic; }
+.hs-label { font-size: 10.5px; font-weight: 600; color: var(--muted-fg); margin: 8px 0 4px; text-transform: uppercase; letter-spacing: .03em; }
+.hs-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.hs-chip {
+  display: inline-flex; align-items: baseline; gap: 4px;
+  font-size: 11.5px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.hs-chip code { font-size: 10px; opacity: .75; font-family: monospace; }
+.hs-c-sein  { background: oklch(0.97 0.018 145 / .6); border-color: oklch(0.82 0.07 145); }
+.hs-c-haben { background: oklch(0.97 0.015 27  / .6); border-color: oklch(0.82 0.08 27);  }
+[data-theme="dark"] .hs-c-sein  { background: oklch(0.22 0.04 145 / .5); border-color: oklch(0.40 0.08 145); }
+[data-theme="dark"] .hs-c-haben { background: oklch(0.22 0.04 27  / .5); border-color: oklch(0.40 0.09 27);  }
+
+/* ── Code block ── */
+pre {
+  font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 12.5px;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  overflow-x: auto;
+  line-height: 1.8;
+  color: var(--foreground);
+}
+pre .tr { color: var(--muted-fg); font-style: italic; font-size: .9em; }
+
+/* ── Lists ── */
+ul.rlist { margin: 0; padding-left: 18px; }
+ul.rlist li { margin: 5px 0; font-size: 13.5px; }
+p.rule { font-size: 13.5px; }
+
+/* ── Separator ── */
+hr.sep { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+/* ── Translations ── */
+.tr {
+  color: var(--muted-fg);
+  font-size: 0.77em;
+  font-style: normal;
+  font-weight: 400;
+  margin-left: 1px;
+  opacity: 0.8;
+}
+
+/* ── hide-tr mode ── */
+.hide-tr .tr { display: none !important; }
+/* Anchor on the preceding German word — same look as .prep-tip */
+.tr-anchor {
+  cursor: help;
+  border-bottom: 1.5px dashed oklch(0.50 0.14 250 / .5);
+}
+/* Global tooltip (appended to body by JS — never clipped by overflow:hidden) */
+#global-tip {
+  position: fixed;
+  z-index: 9999;
+  background: var(--foreground, #111);
+  color: var(--background, #fff);
+  font-size: 11.5px;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  padding: 5px 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / .22);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .12s;
+  max-width: 210px;
+  white-space: pre-line;
+  text-align: left;
+  line-height: 1.6;
+}
+#global-tip.tip-visible { opacity: 1; }
+
+/* ── Emphasis colors ── */
+.hl { color: oklch(0.53 0.2 27); font-weight: 700; }
+.vf { color: oklch(0.36 0.12 250); font-weight: 600; }
+/* ── Gender colors ── */
+.gm { color: oklch(0.42 0.14 250); font-weight: inherit; }   /* masculine – blue */
+.gf { color: oklch(0.50 0.19 27);  font-weight: inherit; }   /* feminine  – red  */
+.gn { color: oklch(0.40 0.13 152); font-weight: inherit; }   /* neuter    – green */
+/* bold variants */
+strong.gm, .gm strong { color: oklch(0.42 0.14 250); }
+strong.gf, .gf strong { color: oklch(0.50 0.19 27);  }
+strong.gn, .gn strong { color: oklch(0.40 0.13 152); }
+
+em { font-style: italic; }
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 32px 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted-fg);
+  font-size: 12.5px;
+  margin-top: 32px;
+}
+
+/* ── Sidebar header (close btn) ── */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 8px;
+  margin-bottom: 4px;
+}
+.sidebar-header h2 { padding: 0; }
+.close-nav {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--muted-fg);
+  border-radius: 4px;
+}
+.close-nav:hover { background: var(--accent); color: var(--foreground); }
+
+/* ── Hamburger (mobile only) ── */
+.hamburger { display: none !important; }
+
+/* ── Nav overlay ── */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / .35);
+  z-index: 99;
+  backdrop-filter: blur(2px);
+}
+.nav-overlay.open { display: block; }
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  aside {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100vh;
+    z-index: 100;
+    transition: left .25s cubic-bezier(.4,0,.2,1);
+    box-shadow: none;
+  }
+  aside.open {
+    left: 0;
+    box-shadow: 8px 0 32px rgb(0 0 0 / .12);
+  }
+  .close-nav { display: flex; align-items: center; justify-content: center; }
+  .hamburger { display: inline-flex !important; }
+  main { padding: 20px 16px 80px; }
+  .page-header { flex-wrap: wrap; gap: 10px; }
+}
+
+/* ── Tighter default spacing ── */
+.card-header { padding: 13px 18px 11px; }
+.card-content { padding: 14px 18px; }
+.card-content > * + * { margin-top: 10px; }
+.level-sep { margin: 26px 0 10px; }
+thead th { height: 30px; padding: 0 8px; font-size: 11.5px; }
+td { padding: 7px 8px; }
+
+/* ── Two-column card grid ── */
+.card-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.card-2col > .card { margin-bottom: 0; }
+@media (max-width: 760px) { .card-2col { grid-template-columns: 1fr; } }
+
+/* ── Präteritum 2-col table ── */
+.tbl-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tbl-2col table { width: 100%; }
+@media (max-width: 760px) { .tbl-2col { grid-template-columns: 1fr; } }
+
+
+
+/* ── Compact mode button ── */
+.btn-sm { height: 32px; font-size: 12px; padding: 4px 11px; }
+
+/* ── Compact mode ── */
+body.compact .card-header  { padding: 9px 14px 8px; }
+body.compact .card-content { padding: 10px 14px; font-size: 12.5px; }
+body.compact td            { padding: 5px 6px; font-size: 12px; }
+body.compact thead th      { height: 25px; font-size: 11px; padding: 0 6px; }
+body.compact .level-sep    { margin: 14px 0 7px; }
+body.compact .card-content > * + * { margin-top: 7px; }
+body.compact .alert        { padding: 9px 12px; font-size: 12.5px; }
+body.compact .card         { margin-bottom: 8px; }
+body.compact .card-2col    { gap: 8px; }
+body.compact pre           { padding: 10px 12px; font-size: 12px; }
+
+/* ── Sidebar: details/summary collapsible groups ── */
+.nav-root { list-style: none; }
+.nav-root > li > details > summary.nav-sep {
+  list-style: none; cursor: pointer; user-select: none;
+  padding: 10px 16px 4px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted-fg); border-top: 1px solid var(--border); margin-top: 4px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-root > li > details > summary.nav-sep::-webkit-details-marker { display: none; }
+.nav-root > li > details > summary.nav-sep::after { content: '▾'; font-size: 9px; opacity: .55; transition: transform .15s; }
+.nav-root > li > details:not([open]) > summary.nav-sep::after { transform: rotate(-90deg); }
+.nav-root > li > details > summary.nav-sep:hover { color: var(--foreground); }
+.nav-sub { list-style: none; padding: 0; }
+
+
+/* ════════════════════════════════════════
+   Mobile fixed header
+   ════════════════════════════════════════ */
+.mob-header {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 52px;
+  z-index: 98;
+  align-items: center;
+  padding: 0 10px;
+  gap: 6px;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgb(0 0 0 / .07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.mhdr-title {
+  flex: 1;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: var(--foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+.mhdr-actions { display: flex; gap: 4px; }
+.mhdr-btn {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border: 1px solid var(--border);
+  background: var(--background);
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted-fg);
+  transition: background .15s, color .15s, border-color .15s;
+  font-family: inherit;
+}
+.mhdr-btn:hover     { background: var(--accent); color: var(--foreground); }
+.mhdr-btn.m-active  { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+
+/* ── mobile responsive overrides ── */
+@media (max-width: 680px) {
+  .mob-header { display: flex; }
+  /* hide desktop header on mobile */
+  .page-header { display: none !important; }
+  /* push content below the fixed header */
+  main { padding-top: 20px; padding-bottom: 24px; }
+  /* aside starts below mobile header */
+  aside { top: 52px !important; height: calc(100vh - 52px) !important; }
+}
+
+
+/* ── Cases overview grid ── */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 12.5px;
+}
+.case-col {
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.case-col:last-child { border-right: none; }
+.case-head {
+  background: var(--muted);
+  padding: 8px 10px 7px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.case-head strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.case-head .case-q {
+  font-size: 11px;
+  color: var(--muted-fg);
+  display: block;
+  margin-top: 1px;
+}
+.case-head .case-q-de {
+  font-size: 10.5px;
+  color: var(--muted-fg);
+  opacity: .7;
+  font-style: italic;
+}
+.case-articles {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.case-row {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+  font-size: 12px;
+}
+.case-row .art-def { font-weight: 600; min-width: 38px; }
+.case-row .art-indef { color: var(--muted-fg); font-size: 11px; }
+.case-row .hl-change { background: oklch(0.94 0.06 250 / .25); border-radius: 2px; padding: 0 2px; }
+[data-theme="dark"] .case-row .hl-change { background: oklch(0.40 0.10 250 / .30); }
+.case-preps {
+  padding: 6px 10px 8px;
+  font-size: 11px;
+  color: var(--muted-fg);
+  flex: 1;
+  line-height: 1.55;
+}
+.case-preps strong { color: var(--foreground); font-size: 10.5px; display: block; margin-bottom: 2px; }
+/* Preposition tooltips — visual affordance only; tooltip rendered by #global-tip via JS */
+.prep-tip {
+  cursor: help;
+  border-bottom: 1px dashed oklch(0.65 0.05 250 / .6);
+  white-space: nowrap;
+}
+@media (max-width: 680px) {
+  .cases-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-col:nth-child(2) { border-right: none; }
+  .case-col:nth-child(3) { border-top: 1px solid var(--border); }
+}
+
+/* ── Preposition illustrations ── */
+.prep-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+  margin-top: 14px;
+}
+.prep-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.prep-item svg { width: 100%; height: auto; max-width: 80px; }
+.prep-label { font-size: 12px; font-weight: 700; color: var(--foreground); }
+.prep-ru    { font-size: 10px; color: var(--muted-fg); }
+
+/* svg theming */
+.prep-box  { fill: var(--secondary); stroke: var(--border); stroke-width: 1.5; }
+.prep-box2 { fill: var(--secondary); stroke: var(--border); stroke-width: 1.5; }
+.prep-ball { fill: oklch(0.55 0.20 250); }
+.prep-ball-faded { fill: oklch(0.55 0.20 250); opacity: 0.3; }
+.prep-floor { stroke: var(--border); stroke-width: 1; }
+[data-theme="dark"] .prep-ball { fill: oklch(0.72 0.15 250); }
+[data-theme="dark"] .prep-ball-faded { fill: oklch(0.72 0.15 250); }
+
+@media (max-width: 680px) {
+  .prep-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+}
+
+/* ══ Progress bar ══ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: oklch(0.58 0.22 250);
+  z-index: 300; border-radius: 0 2px 2px 0;
+  pointer-events: none; transition: width .08s linear;
+}
+[data-theme="dark"] #progress-bar { background: oklch(0.70 0.14 250); }
+
+/* ══ Back to top ══ */
+#back-top {
+  position: fixed; bottom: 24px; right: 20px;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--muted-fg); cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .15s;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 10px rgb(0 0 0 / .12); z-index: 150; font-family: inherit;
+}
+#back-top.show { opacity: 1; pointer-events: auto; }
+#back-top:hover { color: var(--foreground); transform: translateY(-2px); }
+
+/* ══ Search ══ */
+.search-wrap { position: relative; flex: 1; max-width: 200px; }
+.search-input {
+  width: 100%; height: 32px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--background); color: var(--foreground);
+  font-family: inherit; font-size: 12.5px;
+  padding: 0 10px 0 30px; outline: none; transition: border-color .15s;
+}
+.search-input:focus { border-color: oklch(0.55 0.14 250); }
+.search-input::placeholder { color: var(--muted-fg); }
+.search-icon {
+  position: absolute; left: 8px; top: 50%;
+  transform: translateY(-50%); color: var(--muted-fg); pointer-events: none;
+}
+.card.search-hide { display: none !important; }
+.card.search-match .card-header { background: oklch(0.95 0.04 250 / .4); }
+[data-theme="dark"] .card.search-match .card-header { background: oklch(0.28 0.06 250 / .4); }
+#search-noresult { display: none; text-align: center; color: var(--muted-fg); font-size: 13px; padding: 40px 20px; }
+.level-sep.search-hide { display: none !important; }
+.card-2col.search-hide { display: none !important; }
+
+/* ══ Mnemonic chips ══ */
+.mnemonic { display: flex; gap: 4px; flex-wrap: wrap; margin: 6px 0 4px; }
+.mn-chip {
+  display: inline-flex; align-items: center;
+  padding: 3px 9px; border-radius: 6px;
+  font-size: 12.5px; font-weight: 600; border: 1px solid transparent; white-space: nowrap;
+}
+.mn-akk { background: oklch(0.94 0.05 27 / .35); border-color: oklch(0.78 0.10 27 / .5); color: oklch(0.40 0.15 27); }
+.mn-dat { background: oklch(0.93 0.04 237 / .35); border-color: oklch(0.78 0.08 237 / .5); color: oklch(0.35 0.12 237); }
+.mn-gen { background: oklch(0.94 0.05 152 / .35); border-color: oklch(0.78 0.08 152 / .5); color: oklch(0.32 0.12 152); }
+.mn-wex { background: oklch(0.93 0.03 285 / .35); border-color: oklch(0.78 0.05 285 / .5); color: oklch(0.35 0.06 285); }
+[data-theme="dark"] .mn-akk { background: oklch(0.28 0.07 27 / .5); border-color: oklch(0.50 0.12 27 / .6); color: oklch(0.80 0.15 27); }
+[data-theme="dark"] .mn-dat { background: oklch(0.25 0.06 237 / .5); border-color: oklch(0.45 0.10 237 / .6); color: oklch(0.78 0.12 237); }
+[data-theme="dark"] .mn-gen { background: oklch(0.25 0.06 152 / .5); border-color: oklch(0.45 0.10 152 / .6); color: oklch(0.78 0.12 152); }
+[data-theme="dark"] .mn-wex { background: oklch(0.25 0.03 285 / .5); border-color: oklch(0.45 0.06 285 / .6); color: oklch(0.78 0.07 285); }
+
+/* ══ Formula blocks ══ */
+.formula {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  padding: 9px 14px; border: 1px solid var(--border);
+  border-radius: var(--radius); background: var(--secondary); font-size: 12.5px; margin: 4px 0;
+}
+.f-slot {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 3px 9px; border-radius: 5px; font-weight: 700; white-space: nowrap;
+}
+.f-subj { background: oklch(0.90 0.05 250 / .6); color: oklch(0.30 0.14 250); }
+.f-aux  { background: oklch(0.90 0.08 152 / .6); color: oklch(0.28 0.14 152); }
+.f-part { background: oklch(0.91 0.07 27 / .6);  color: oklch(0.35 0.15 27); }
+.f-inf  { background: oklch(0.92 0.05 85 / .6);  color: oklch(0.35 0.12 85); }
+.f-mid  { color: var(--muted-fg); font-size: 11px; }
+.f-plus { color: var(--muted-fg); font-size: 15px; font-weight: 300; }
+[data-theme="dark"] .f-subj { background: oklch(0.28 0.08 250 / .6); color: oklch(0.80 0.15 250); }
+[data-theme="dark"] .f-aux  { background: oklch(0.25 0.08 152 / .6); color: oklch(0.78 0.15 152); }
+[data-theme="dark"] .f-part { background: oklch(0.28 0.08 27 / .6);  color: oklch(0.80 0.15 27); }
+[data-theme="dark"] .f-inf  { background: oklch(0.28 0.06 85 / .6);  color: oklch(0.80 0.12 85); }
+
+/* ══ Timeline ══ */
+.timeline-wrap { overflow-x: auto; padding: 8px 0 58px; }
+.timeline-axis { display: flex; align-items: center; min-width: 560px; position: relative; }
+.tl-line { flex: 1; height: 2px; background: var(--border); }
+.tl-node { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; position: relative; }
+.tl-dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid; background: var(--card); }
+.tl-dot.tl-now { width: 17px; height: 17px; }
+.tl-label { position: absolute; top: 19px; white-space: nowrap; font-size: 11px; font-weight: 700; text-align: center; }
+.tl-sub   { position: absolute; top: 33px; white-space: nowrap; font-size: 10px; color: var(--muted-fg); text-align: center; }
+.tl-past  { border-color: oklch(0.50 0.19 27); }
+.tl-pres  { border-color: oklch(0.55 0.22 250); }
+.tl-fut   { border-color: oklch(0.40 0.13 152); }
+.tl-label-past  { color: oklch(0.50 0.19 27); }
+.tl-label-pres  { color: oklch(0.42 0.14 250); }
+.tl-label-fut   { color: oklch(0.40 0.13 152); }
+[data-theme="dark"] .tl-label-past { color: oklch(0.72 0.17 27); }
+[data-theme="dark"] .tl-label-pres { color: oklch(0.70 0.14 250); }
+[data-theme="dark"] .tl-label-fut  { color: oklch(0.68 0.13 152); }
+.tl-caption { font-size: 10.5px; color: var(--muted-fg); text-align: center; margin-top: 4px; letter-spacing: .04em; }
+
+/* ══ Tabs ══ */
+.tab-bar { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 14px; overflow-x: auto; }
+.tab-btn {
+  padding: 7px 13px; font-size: 12px; font-weight: 500;
+  font-family: inherit; border: none; background: transparent;
+  color: var(--muted-fg); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color .15s, border-color .15s; white-space: nowrap; flex-shrink: 0;
+}
+.tab-btn:hover { color: var(--foreground); }
+.tab-btn.tab-active { color: var(--foreground); border-bottom-color: var(--foreground); }
+.tab-panel { display: none; }
+.tab-panel.tab-active { display: block; }
+
+/* ══ Coloured sentence roles ══ */
+.ex-s { color: oklch(0.38 0.14 250); font-weight: 600; }
+.ex-v { color: oklch(0.45 0.18 27);  font-weight: 700; }
+.ex-o { color: oklch(0.36 0.12 152); font-weight: 600; }
+.ex-a { color: oklch(0.38 0.10 85);  font-style: italic; }
+[data-theme="dark"] .ex-s { color: oklch(0.72 0.14 250); }
+[data-theme="dark"] .ex-v { color: oklch(0.72 0.17 27); }
+[data-theme="dark"] .ex-o { color: oklch(0.68 0.13 152); }
+[data-theme="dark"] .ex-a { color: oklch(0.70 0.12 85); }
+.ex-legend {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 8px; font-size: 11px; color: var(--muted-fg);
+  padding: 6px 10px; background: var(--secondary);
+  border-radius: var(--radius); border: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<header class="mob-header" id="mobHeader">
+  <button class="mhdr-btn" onclick="toggleNav()" aria-label="Меню">
+    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="search-wrap" style="max-width:130px;margin-left:4px">
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" class="search-input" placeholder="Поиск…" oninput="doSearch(this.value)" style="font-size:12px">
+  </div>
+  <div class="mhdr-actions">
+    <button class="mhdr-btn" id="darkBtnM" onclick="toggleDark()" aria-label="Тема" title="Тёмная тема"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    <button class="mhdr-btn" id="trBtnM" onclick="toggleTr()" aria-label="Переводы" title="Переводы">
+      <svg id="trIconM" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+    <button class="mhdr-btn" id="compactBtnM" onclick="toggleCompact()" aria-label="Компакт" title="Компакт">
+      <svg id="compactIconM" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <h2>Содержание</h2>
+    <button class="close-nav" onclick="toggleNav()" aria-label="Закрыть">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <ul class="nav-root">
+  <li><details open><summary class="nav-sep">Артикли и мест.</summary><ul class="nav-sub">
+    <li><a href="#s1">Артикли и род</a></li>
+    <li><a href="#s2">Личн. мест.</a></li>
+    <li><a href="#s3">Притяжат. мест.</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Падежи</summary><ul class="nav-sub">
+    <li><a href="#s4">Nom. & Akk.</a></li>
+    <li><a href="#s5">Dativ</a></li>
+    <li><a href="#s6">Genitiv</a></li>
+    <li><a href="#s7">Wechselpräp.</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Склонение</summary><ul class="nav-sub">
+    <li><a href="#s8">Склон. прилаг.</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Времена</summary><ul class="nav-sub">
+    <li><a href="#s9">Präsens</a></li>
+    <li><a href="#s10">Perfekt</a></li>
+    <li><a href="#s11">Präteritum</a></li>
+    <li><a href="#s12">Plusquamperfekt</a></li>
+    <li><a href="#s13">Futur I</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Наклонения</summary><ul class="nav-sub">
+    <li><a href="#s14">Imperativ</a></li>
+    <li><a href="#s15">Konjunktiv II</a></li>
+    <li><a href="#s16">Konj. II прошл.</a></li>
+    <li><a href="#s17">Passiv</a></li>
+    <li><a href="#s29">Indir. Rede</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Глаголы</summary><ul class="nav-sub">
+    <li><a href="#s18">Modalverben</a></li>
+    <li><a href="#s19">Trennb. Vb.</a></li>
+    <li><a href="#s20">Reflexive Vb.</a></li>
+    <li><a href="#s21">Infinitiv + zu</a></li>
+    <li><a href="#s30">Verb lassen</a></li>
+    <li><a href="#s31">Vb + Präp.</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Предложения</summary><ul class="nav-sub">
+    <li><a href="#s22">Порядок слов</a></li>
+    <li><a href="#s23">Nebensätze</a></li>
+    <li><a href="#s24">Relativsätze</a></li>
+    <li><a href="#s25">Двойн. союзы</a></li>
+    <li><a href="#s32">Konditionalsätze</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Прочее</summary><ul class="nav-sub">
+    <li><a href="#s26">Отрицание</a></li>
+    <li><a href="#s27">Komparativ</a></li>
+    <li><a href="#s28">da-/wo-</a></li>
+    <li><a href="#s33">Partizipien</a></li>
+    <li><a href="#s34">Nominalisierung</a></li>
+    <li><a href="#s35">Ordinalzahlen</a></li>
+  </ul></details></li>
+  <li><details open><summary class="nav-sep">Справочник</summary><ul class="nav-sub">
+    <li><a href="#quick">Предлоги</a></li>
+    <li><a href="#quick2">Союзы</a></li>
+  </ul></details></li>
+</ul>
+</aside>
+<div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+
+<header class="page-header">
+  <span class="page-title">Немецкий · Шпаргалки</span>
+  <div class="search-wrap">
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" class="search-input" placeholder="Поиск по теме…" oninput="doSearch(this.value)">
+  </div>
+  <button class="btn btn-outline hamburger" id="hamburgerBtn" onclick="toggleNav()" aria-label="Меню"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <button class="btn btn-outline btn-icon" id="darkBtn" onclick="toggleDark()" title="Тёмная / светлая тема" aria-label="Тема"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  <button class="btn btn-outline btn-icon" id="compactBtn" onclick="toggleCompact()" title="Компактный режим"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg></button>
+  <button class="btn btn-outline btn-icon" id="trBtn" onclick="toggleTr()" title="Скрыть / показать переводы" aria-label="Переводы"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+</header>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Артикли и местоимения</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s1">
+  <div class="card-header">
+    <span class="badge badge-num">1</span>
+    <div class="card-title">Артикли и род <span class="de">(Artikel &amp; Genus)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Род</th><th>Определённый</th><th>Неопределённый</th><th>Отрицательный</th></tr></thead>
+      <tbody>
+        <tr><td><span class="gm">м.р. <strong>der</strong></span></td><td>der Mann <span class="tr">(мужчина)</span></td><td>ein Mann</td><td>kein Mann</td></tr>
+        <tr><td><span class="gf">ж.р. <strong>die</strong></span></td><td>die Frau <span class="tr">(женщина)</span></td><td>eine Frau</td><td>keine Frau</td></tr>
+        <tr><td><span class="gn">с.р. <strong>das</strong></span></td><td>das Kind <span class="tr">(ребёнок)</span></td><td>ein Kind</td><td>kein Kind</td></tr>
+        <tr><td>мн.ч. <strong>die</strong></td><td>die Männer <span class="tr">(мужчины)</span></td><td>— Männer</td><td>keine Männer</td></tr>
+      </tbody>
+    </table></div>
+    <p class="rule" style="font-weight:600;margin-top:4px">Суффиксы-подсказки:</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th class="gm">der (м.р.)</th><th class="gf">die (ж.р.)</th><th class="gn">das (с.р.)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>-er, -ling, -ismus</td>
+          <td>-ung, -heit, -keit, -schaft, -tion, -tät, -ik</td>
+          <td>-chen, -lein, -ment, -um, -tum</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn">
+      <span class="alert-icon">⚠️</span>
+      <div class="alert-body">
+        <p class="alert-title">Исключения</p>
+        <ul>
+          <li>das <strong>Mädchen</strong> <span class="tr">(девочка)</span> — с.р. из-за суффикса -chen</li>
+          <li>der <strong>See</strong> <span class="tr">(озеро)</span> ≠ die <strong>See</strong> <span class="tr">(море)</span></li>
+          <li>die <strong>Person</strong> <span class="tr">(человек)</span> — ж.р., хотя может быть о мужчине</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="s2">
+  <div class="card-header">
+    <span class="badge badge-num">2</span>
+    <div class="card-title">Личные местоимения <span class="de">(Personalpronomen)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Лицо</th><th>Nom.</th><th>Akk.</th><th>Dat.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ich</strong> <span class="tr">(я)</span></td><td>ich <span class="tr">(я)</span></td><td>mich <span class="tr">(меня)</span></td><td>mir <span class="tr">(мне)</span></td></tr>
+        <tr><td><strong>du</strong> <span class="tr">(ты)</span></td><td>du <span class="tr">(ты)</span></td><td>dich <span class="tr">(тебя)</span></td><td>dir <span class="tr">(тебе)</span></td></tr>
+        <tr><td><strong>er/sie/es</strong> <span class="tr">(он/она/оно)</span></td><td>er/sie/es</td><td>ihn <span class="tr">(его)</span> / sie <span class="tr">(её)</span> / es <span class="tr">(его)</span></td><td>ihm <span class="tr">(ему)</span> / ihr <span class="tr">(ей)</span> / ihm <span class="tr">(ему)</span></td></tr>
+        <tr><td><strong>wir</strong> <span class="tr">(мы)</span></td><td>wir <span class="tr">(мы)</span></td><td>uns <span class="tr">(нас)</span></td><td>uns <span class="tr">(нам)</span></td></tr>
+        <tr><td><strong>ihr</strong> <span class="tr">(вы, неформ.)</span></td><td>ihr <span class="tr">(вы)</span></td><td>euch <span class="tr">(вас)</span></td><td>euch <span class="tr">(вам)</span></td></tr>
+        <tr><td><strong>sie/Sie</strong> <span class="tr">(они/Вы вежл.)</span></td><td>sie/Sie</td><td>sie <span class="tr">(их)</span> / Sie <span class="tr">(Вас)</span></td><td>ihnen <span class="tr">(им)</span> / Ihnen <span class="tr">(Вам)</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body"><p><strong>Sie</strong> (вежливое) — всегда с заглавной буквы!</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="s3">
+  <div class="card-header"><span class="badge badge-num">3</span><div class="card-title">Притяжательные местоимения <span class="de">(Possessivpronomen)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Лицо</th><th class="gm">м.р. (Nom.)</th><th class="gf">ж.р. (Nom.)</th><th class="gn">с.р. (Nom.)</th><th>мн.ч. (Nom.)</th></tr></thead>
+      <tbody>
+        <tr><td>ich <span class="tr">(я)</span></td><td><strong>mein</strong> <span class="tr">(мой)</span></td><td>meine <span class="tr">(моя)</span></td><td>mein <span class="tr">(моё)</span></td><td>meine <span class="tr">(мои)</span></td></tr>
+        <tr><td>du <span class="tr">(ты)</span></td><td><strong>dein</strong> <span class="tr">(твой)</span></td><td>deine <span class="tr">(твоя)</span></td><td>dein <span class="tr">(твоё)</span></td><td>deine <span class="tr">(твои)</span></td></tr>
+        <tr><td>er/es <span class="tr">(он/оно)</span></td><td><strong>sein</strong> <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td><td>sein <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td></tr>
+        <tr><td>sie <span class="tr">(она)</span></td><td><strong>ihr</strong> <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td><td>ihr <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td></tr>
+        <tr><td>wir <span class="tr">(мы)</span></td><td><strong>unser</strong> <span class="tr">(наш)</span></td><td>unsere <span class="tr">(наша)</span></td><td>unser <span class="tr">(наше)</span></td><td>unsere <span class="tr">(наши)</span></td></tr>
+        <tr><td>ihr <span class="tr">(вы)</span></td><td><strong>euer</strong> <span class="tr">(ваш)</span></td><td>eu<strong>e</strong>re <span class="tr">(ваша)</span></td><td>euer <span class="tr">(ваше)</span></td><td>eu<strong>e</strong>re <span class="tr">(ваши)</span></td></tr>
+        <tr><td>sie/Sie <span class="tr">(они/Вы)</span></td><td><strong>ihr/Ihr</strong> <span class="tr">(их/Ваш)</span></td><td>ihre/Ihre <span class="tr">(их/Ваша)</span></td><td>ihr/Ihr <span class="tr">(их/Ваше)</span></td><td>ihre/Ihre <span class="tr">(их/Ваши)</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Падежи</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s4-summary">
+  <div class="card-header">
+    <span class="badge badge-num" style="background:var(--primary);color:var(--primary-fg)">★</span>
+    <div class="card-title">Сводная таблица падежей <span class="de">(Kasusübersicht)</span></div>
+  </div>
+  <div class="card-content">
+    <div class="cases-grid">
+
+      <!-- Nominativ -->
+      <div class="case-col">
+        <div class="case-head">
+          <strong>Nominativ</strong>
+          <span class="case-q">Кто? Что?</span>
+          <span class="case-q-de">Wer? Was?</span>
+        </div>
+        <div class="case-articles">
+          <div class="case-row"><span class="art-def gm">der</span><span class="art-indef gm">ein</span></div>
+          <div class="case-row"><span class="art-def gf">die</span><span class="art-indef gf">eine</span></div>
+          <div class="case-row"><span class="art-def gn">das</span><span class="art-indef gn">ein</span></div>
+          <div class="case-row"><span class="art-def">die</span><span class="art-indef">—</span></div>
+        </div>
+        <div class="case-preps">
+          <strong>Функция</strong>
+          подлежащее предложения
+        </div>
+      </div>
+
+      <!-- Akkusativ -->
+      <div class="case-col">
+        <div class="case-head">
+          <strong>Akkusativ</strong>
+          <span class="case-q">Кого? Что?</span>
+          <span class="case-q-de">Wen? Was?</span>
+        </div>
+        <div class="case-articles">
+          <div class="case-row"><span class="art-def gm">den</span><span class="art-indef gm">einen</span></div>
+          <div class="case-row"><span class="art-def gf">die</span><span class="art-indef gf">eine</span></div>
+          <div class="case-row"><span class="art-def gn">das</span><span class="art-indef gn">ein</span></div>
+          <div class="case-row"><span class="art-def">die</span><span class="art-indef">—</span></div>
+        </div>
+        <div class="case-preps">
+          <strong>Предлоги</strong>
+          <span class="prep-tip" data-tip="через">durch</span> ·
+          <span class="prep-tip" data-tip="для / за">für</span> ·
+          <span class="prep-tip" data-tip="против">gegen</span> ·
+          <span class="prep-tip" data-tip="без">ohne</span> ·
+          <span class="prep-tip" data-tip="вокруг / в (время)">um</span> ·
+          <span class="prep-tip" data-tip="до (места/времени)">bis</span> ·
+          <span class="prep-tip" data-tip="вдоль">entlang</span>
+          <strong style="margin-top:4px">Глаголы</strong>
+          <span class="prep-tip" data-tip="видеть&#10;ich sehe&#10;du siehst&#10;er/sie/es sieht&#10;wir sehen · ihr seht&#10;Sie sehen">sehen</span> ·
+          <span class="prep-tip" data-tip="слышать&#10;ich höre&#10;du hörst&#10;er/sie/es hört&#10;wir hören · ihr hört&#10;Sie hören">hören</span> ·
+          <span class="prep-tip" data-tip="спрашивать&#10;ich frage&#10;du fragst&#10;er/sie/es fragt&#10;wir fragen · ihr fragt&#10;Sie fragen">fragen</span> ·
+          <span class="prep-tip" data-tip="любить&#10;ich liebe&#10;du liebst&#10;er/sie/es liebt&#10;wir lieben · ihr liebt&#10;Sie lieben">lieben</span> ·
+          <span class="prep-tip" data-tip="читать&#10;ich lese&#10;du liest&#10;er/sie/es liest&#10;wir lesen · ihr lest&#10;Sie lesen">lesen</span> ·
+          <span class="prep-tip" data-tip="знать (лично)&#10;ich kenne&#10;du kennst&#10;er/sie/es kennt&#10;wir kennen · ihr kennt&#10;Sie kennen">kennen</span> ·
+          <span class="prep-tip" data-tip="нуждаться&#10;ich brauche&#10;du brauchst&#10;er/sie/es braucht&#10;wir brauchen · ihr braucht&#10;Sie brauchen">brauchen</span> ·
+          <span class="prep-tip" data-tip="искать&#10;ich suche&#10;du suchst&#10;er/sie/es sucht&#10;wir suchen · ihr sucht&#10;Sie suchen">suchen</span> ·
+          <span class="prep-tip" data-tip="находить&#10;ich finde&#10;du findest&#10;er/sie/es findet&#10;wir finden · ihr findet&#10;Sie finden">finden</span> ·
+          <span class="prep-tip" data-tip="встречать&#10;ich treffe&#10;du triffst&#10;er/sie/es trifft&#10;wir treffen · ihr trefft&#10;Sie treffen">treffen</span> ·
+          <span class="prep-tip" data-tip="забывать&#10;ich vergesse&#10;du vergisst&#10;er/sie/es vergisst&#10;wir vergessen · ihr vergesst&#10;Sie vergessen">vergessen</span> ·
+          <span class="prep-tip" data-tip="приглашать&#10;ich lade ein&#10;du lädst ein&#10;er/sie/es lädt ein&#10;wir laden ein · ihr ladet ein&#10;Sie laden ein">einladen</span>
+        </div>
+      </div>
+
+      <!-- Dativ -->
+      <div class="case-col">
+        <div class="case-head">
+          <strong>Dativ</strong>
+          <span class="case-q">Кому?</span>
+          <span class="case-q-de">Wem?</span>
+        </div>
+        <div class="case-articles">
+          <div class="case-row"><span class="art-def gm">dem</span><span class="art-indef gm">einem</span></div>
+          <div class="case-row"><span class="art-def gf">der</span><span class="art-indef gf">einer</span></div>
+          <div class="case-row"><span class="art-def gn">dem</span><span class="art-indef gn">einem</span></div>
+          <div class="case-row"><span class="art-def">den</span><span class="art-indef">— <span class="hl">+n</span></span></div>
+        </div>
+        <div class="case-preps">
+          <strong>Предлоги</strong>
+          <span class="prep-tip" data-tip="из">aus</span> ·
+          <span class="prep-tip" data-tip="у / при">bei</span> ·
+          <span class="prep-tip" data-tip="с / вместе с">mit</span> ·
+          <span class="prep-tip" data-tip="в / после / по">nach</span> ·
+          <span class="prep-tip" data-tip="с (момента времени)">seit</span> ·
+          <span class="prep-tip" data-tip="от / о / из">von</span> ·
+          <span class="prep-tip" data-tip="к / до">zu</span> ·
+          <span class="prep-tip" data-tip="напротив / по отношению к">gegenüber</span> ·
+          <span class="prep-tip" data-tip="кроме / за исключением">außer</span>
+          <strong style="margin-top:4px">Глаголы</strong>
+          <span class="prep-tip" data-tip="помогать&#10;ich helfe&#10;du hilfst&#10;er/sie/es hilft&#10;wir helfen · ihr helft&#10;Sie helfen">helfen</span> ·
+          <span class="prep-tip" data-tip="благодарить&#10;ich danke&#10;du dankst&#10;er/sie/es dankt&#10;wir danken · ihr dankt&#10;Sie danken">danken</span> ·
+          <span class="prep-tip" data-tip="нравиться&#10;ich gefalle&#10;du gefällst&#10;er/sie/es gefällt&#10;wir gefallen · ihr gefallt&#10;Sie gefallen">gefallen</span> ·
+          <span class="prep-tip" data-tip="принадлежать&#10;ich gehöre&#10;du gehörst&#10;er/sie/es gehört&#10;wir gehören · ihr gehört&#10;Sie gehören">gehören</span> ·
+          <span class="prep-tip" data-tip="следовать&#10;ich folge&#10;du folgst&#10;er/sie/es folgt&#10;wir folgen · ihr folgt&#10;Sie folgen">folgen</span> ·
+          <span class="prep-tip" data-tip="отвечать&#10;ich antworte&#10;du antwortest&#10;er/sie/es antwortet&#10;wir antworten · ihr antwortet&#10;Sie antworten">antworten</span> ·
+          <span class="prep-tip" data-tip="верить&#10;ich glaube&#10;du glaubst&#10;er/sie/es glaubt&#10;wir glauben · ihr glaubt&#10;Sie glauben">glauben</span> ·
+          <span class="prep-tip" data-tip="слушать (вним.)&#10;ich höre zu&#10;du hörst zu&#10;er/sie/es hört zu&#10;wir hören zu · ihr hört zu&#10;Sie hören zu">zuhören</span> ·
+          <span class="prep-tip" data-tip="подходить&#10;ich passe&#10;du passt&#10;er/sie/es passt&#10;wir passen · ihr passt&#10;Sie passen">passen</span> ·
+          <span class="prep-tip" data-tip="быть вкусным&#10;ich schmecke&#10;du schmeckst&#10;er/sie/es schmeckt&#10;wir schmecken · ihr schmeckt&#10;Sie schmecken">schmecken</span> ·
+          <span class="prep-tip" data-tip="болеть / причинять боль&#10;ich tue weh&#10;du tust weh&#10;er/sie/es tut weh&#10;wir tun weh · ihr tut weh&#10;Sie tun weh">weh tun</span>
+        </div>
+      </div>
+
+      <!-- Genitiv -->
+      <div class="case-col">
+        <div class="case-head">
+          <strong>Genitiv</strong>
+          <span class="case-q">Чей? Чьего?</span>
+          <span class="case-q-de">Wessen?</span>
+        </div>
+        <div class="case-articles">
+          <div class="case-row"><span class="art-def gm">des</span><span class="art-indef gm">eines <span class="hl">+s</span></span></div>
+          <div class="case-row"><span class="art-def gf">der</span><span class="art-indef gf">einer</span></div>
+          <div class="case-row"><span class="art-def gn">des</span><span class="art-indef gn">eines <span class="hl">+s</span></span></div>
+          <div class="case-row"><span class="art-def">der</span><span class="art-indef">—</span></div>
+        </div>
+        <div class="case-preps">
+          <strong>Предлоги</strong>
+          <span class="prep-tip" data-tip="из-за">wegen</span> ·
+          <span class="prep-tip" data-tip="несмотря на">trotz</span> ·
+          <span class="prep-tip" data-tip="во время">während</span> ·
+          <span class="prep-tip" data-tip="вместо">statt</span> ·
+          <span class="prep-tip" data-tip="за пределами / вне">außerhalb</span> ·
+          <span class="prep-tip" data-tip="внутри / в пределах">innerhalb</span> ·
+          <span class="prep-tip" data-tip="на основании / из-за">aufgrund</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="card" id="s4">
+  <div class="card-header">
+    <span class="badge badge-num">4</span>
+    <div class="card-title">Именительный и Винительный <span class="de">(Nominativ &amp; Akkusativ)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Nom.</strong></td><td><span class="gm">der / ein</span></td><td><span class="gf">die / eine</span></td><td><span class="gn">das / ein</span></td><td>die / —</td></tr>
+        <tr><td><strong>Akk.</strong></td><td><span class="hl gm">den / einen</span></td><td><span class="gf">die / eine</span></td><td><span class="gn">das / ein</span></td><td>die / —</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body"><p>Меняется только <strong>мужской род</strong>: der → <strong>den</strong>, ein → <strong>einen</strong></p></div>
+    </div>
+    <p class="rule" style="font-weight:600;margin-bottom:4px">Предлоги Akkusativ:</p>
+    <div class="mnemonic">
+      <span class="mn-chip mn-akk">durch <span class="tr" style="font-weight:400">(сквозь)</span></span>
+      <span class="mn-chip mn-akk">für <span class="tr" style="font-weight:400">(для)</span></span>
+      <span class="mn-chip mn-akk">gegen <span class="tr" style="font-weight:400">(против)</span></span>
+      <span class="mn-chip mn-akk">ohne <span class="tr" style="font-weight:400">(без)</span></span>
+      <span class="mn-chip mn-akk">um <span class="tr" style="font-weight:400">(вокруг)</span></span>
+      <span class="mn-chip mn-akk">bis <span class="tr" style="font-weight:400">(до)</span></span>
+      <span class="mn-chip mn-akk">entlang <span class="tr" style="font-weight:400">(вдоль)</span></span>
+    </div>
+    <p class="rule"><strong>Глаголы с Akkusativ:</strong> sehen <span class="tr">(видеть)</span>, hören <span class="tr">(слышать)</span>, fragen <span class="tr">(спрашивать)</span>, lieben <span class="tr">(любить)</span>, lesen <span class="tr">(читать)</span>, kennen <span class="tr">(знать)</span>, brauchen <span class="tr">(нуждаться)</span>, kaufen <span class="tr">(покупать)</span>, nehmen <span class="tr">(брать)</span>, suchen <span class="tr">(искать)</span>, finden <span class="tr">(находить)</span>, treffen <span class="tr">(встречать)</span>, vergessen <span class="tr">(забывать)</span>, einladen <span class="tr">(приглашать)</span>, besuchen <span class="tr">(навещать)</span>, verstehen <span class="tr">(понимать)</span>, rufen <span class="tr">(звать/называть)</span>, anrufen <span class="tr">(звонить)</span></p>
+  </div>
+</div>
+
+<div class="card-2col">
+<div class="card" id="s5">
+  <div class="card-header"><span class="badge badge-num">5</span><div class="card-title">Дательный падеж <span class="de">(Dativ)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+      <tbody><tr><td><strong>Dat.</strong></td><td><span class="gm">dem / einem</span></td><td><span class="gf">der / einer</span></td><td><span class="gn">dem / einem</span></td><td>den / — <span class="hl">+n</span></td></tr></tbody>
+    </table></div>
+    <p class="rule" style="font-weight:600;margin-bottom:4px">Предлоги Dativ:</p>
+    <div class="mnemonic">
+      <span class="mn-chip mn-dat">aus <span class="tr" style="font-weight:400">(из)</span></span>
+      <span class="mn-chip mn-dat">bei <span class="tr" style="font-weight:400">(у/при)</span></span>
+      <span class="mn-chip mn-dat">mit <span class="tr" style="font-weight:400">(с)</span></span>
+      <span class="mn-chip mn-dat">nach <span class="tr" style="font-weight:400">(после/в)</span></span>
+      <span class="mn-chip mn-dat">seit <span class="tr" style="font-weight:400">(с/уже)</span></span>
+      <span class="mn-chip mn-dat">von <span class="tr" style="font-weight:400">(от)</span></span>
+      <span class="mn-chip mn-dat">zu <span class="tr" style="font-weight:400">(к)</span></span>
+      <span class="mn-chip mn-dat">gegenüber <span class="tr" style="font-weight:400">(напротив)</span></span>
+      <span class="mn-chip mn-dat">außer <span class="tr" style="font-weight:400">(кроме)</span></span>
+    </div>
+    <p class="rule"><strong>Глаголы с Dativ:</strong> helfen <span class="tr">(помогать)</span>, danken <span class="tr">(благодарить)</span>, gefallen <span class="tr">(нравиться)</span>, gehören <span class="tr">(принадлежать)</span>, folgen <span class="tr">(следовать)</span>, antworten <span class="tr">(отвечать)</span>, glauben <span class="tr">(верить)</span>, zuhören <span class="tr">(слушать)</span>, passen <span class="tr">(подходить)</span>, schmecken <span class="tr">(быть вкусным)</span>, weh tun <span class="tr">(болеть / причинять боль)</span></p>
+  </div>
+</div>
+
+<div class="card" id="s6">
+  <div class="card-header"><span class="badge badge-num">6</span><div class="card-title">Родительный падеж <span class="de">(Genitiv)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+      <tbody><tr><td><strong>Gen.</strong></td><td><span class="gm">des/eines</span> <span class="hl">+(e)s</span></td><td><span class="gf">der/einer</span></td><td><span class="gn">des/eines</span> <span class="hl">+(e)s</span></td><td>der/—</td></tr></tbody>
+    </table></div>
+    <p class="rule"><strong>Предлоги Genitiv:</strong> wegen <span class="tr">(из-за)</span>, trotz <span class="tr">(несмотря на)</span>, während <span class="tr">(во время)</span>, statt <span class="tr">(вместо)</span>, außerhalb <span class="tr">(вне)</span>, innerhalb <span class="tr">(внутри)</span>, aufgrund <span class="tr">(на основании)</span>, mithilfe <span class="tr">(с помощью)</span></p>
+  </div>
+</div>
+</div>
+
+<div class="card" id="s7">
+  <div class="card-header"><span class="badge badge-num">7</span><div class="card-title">Wechselpräpositionen — место и направление</div></div>
+  <div class="card-content">
+    <p class="rule" style="margin-bottom:10px">an <span class="tr">(у/на)</span>, auf <span class="tr">(на)</span>, hinter <span class="tr">(за)</span>, in <span class="tr">(в)</span>, neben <span class="tr">(рядом)</span>, über <span class="tr">(над/о)</span>, unter <span class="tr">(под)</span>, vor <span class="tr">(перед)</span>, zwischen <span class="tr">(между)</span></p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Вопрос</th><th>Падеж</th><th>Глаголы</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wo?</strong> <span class="tr">(где?)</span></td><td>Dativ</td><td>liegen <span class="tr">(лежать)</span>, stehen <span class="tr">(стоять)</span>, sitzen <span class="tr">(сидеть)</span>, hängen <span class="tr">(висеть)</span></td><td><em>Das Buch liegt <strong>auf dem</strong> Tisch <span class="tr">(столе)</span>.</em></td></tr>
+        <tr><td><strong>Wohin?</strong> <span class="tr">(куда?)</span></td><td>Akkusativ</td><td>legen <span class="tr">(класть)</span>, stellen <span class="tr">(ставить)</span>, setzen <span class="tr">(сажать)</span></td><td><em>Ich lege das Buch <strong>auf den</strong> Tisch <span class="tr">(стол)</span>.</em></td></tr>
+      </tbody>
+    </table></div>
+    <p class="rule" style="color:var(--muted-fg);font-size:12.5px">Слияния: an+dem=<strong>am</strong>, in+dem=<strong>im</strong>, an+das=<strong>ans</strong>, in+das=<strong>ins</strong></p>
+    <div class="prep-grid">
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="17" y="22" width="36" height="20" rx="2"/><circle class="prep-ball" cx="35" cy="14" r="6"/></svg>
+        <span class="prep-label">auf</span>
+        <span class="prep-ru">на</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="17" y="22" width="36" height="20" rx="2"/><circle class="prep-ball" cx="35" cy="7" r="6"/></svg>
+        <span class="prep-label">über</span>
+        <span class="prep-ru">над</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="17" y="22" width="36" height="20" rx="2"/><circle class="prep-ball" cx="35" cy="51" r="6"/></svg>
+        <span class="prep-label">unter</span>
+        <span class="prep-ru">под</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="17" y="22" width="36" height="20" rx="2"/><circle class="prep-ball" cx="8" cy="32" r="6"/></svg>
+        <span class="prep-label">an</span>
+        <span class="prep-ru">у/на
+(вертик.)</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="17" y="22" width="36" height="20" rx="2" fill="none"/><circle class="prep-ball" cx="35" cy="32" r="6"/></svg>
+        <span class="prep-label">in</span>
+        <span class="prep-ru">в</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="17" y="22" width="36" height="20" rx="2"/><circle class="prep-ball" cx="59" cy="32" r="6"/></svg>
+        <span class="prep-label">neben</span>
+        <span class="prep-ru">рядом</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 62" xmlns="http://www.w3.org/2000/svg"><polygon class="prep-box2" points="14,18 56,18 63,26 21,26"/><rect class="prep-box" x="21" y="26" width="42" height="18" rx="0"/><circle class="prep-ball" cx="35" cy="52" r="6"/></svg>
+        <span class="prep-label">vor</span>
+        <span class="prep-ru">перед</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 62" xmlns="http://www.w3.org/2000/svg"><circle class="prep-ball-faded" cx="35" cy="9" r="6"/><polygon class="prep-box2" points="14,18 56,18 63,26 21,26"/><rect class="prep-box" x="21" y="26" width="42" height="18" rx="0"/></svg>
+        <span class="prep-label">hinter</span>
+        <span class="prep-ru">за</span>
+      </div>
+      <div class="prep-item">
+        <svg viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg" style="overflow:visible"><rect class="prep-box" x="2" y="22" width="24" height="20" rx="2"/><circle class="prep-ball" cx="35" cy="32" r="6"/><rect class="prep-box" x="44" y="22" width="24" height="20" rx="2"/></svg>
+        <span class="prep-label">zwischen</span>
+        <span class="prep-ru">между</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Склонение</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s8">
+  <div class="card-header"><span class="badge badge-num">8</span><div class="card-title">Склонение прилагательных <span class="de">(Adjektivdeklination)</span></div></div>
+  <div class="card-content">
+    <div class="tab-bar">
+      <button class="tab-btn tab-active" onclick="switchTab(this,'tab-adj-1')">Тип 1 — der/die/das</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-adj-2')">Тип 2 — ein/kein/mein</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-adj-3')">Тип 3 — без артикля</button>
+    </div>
+    <div id="tab-adj-1" class="tab-panel tab-active">
+      <p class="rule" style="color:var(--muted-fg);font-size:12px;margin-bottom:8px">Слабое склонение — артикль уже содержит признак рода, прилагательное добавляет <strong>-e</strong> или <strong>-en</strong></p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>Nom.</td><td><span class="gm">der</span> alt<span class="hl">e</span> Mann</td><td><span class="gf">die</span> alt<span class="hl">e</span> Frau</td><td><span class="gn">das</span> alt<span class="hl">e</span> Kind</td><td>die alt<span class="hl">en</span> Kinder</td></tr>
+          <tr><td>Akk.</td><td><span class="gm">den</span> alt<span class="hl">en</span> Mann</td><td><span class="gf">die</span> alt<span class="hl">e</span> Frau</td><td><span class="gn">das</span> alt<span class="hl">e</span> Kind</td><td>die alt<span class="hl">en</span> Kinder</td></tr>
+          <tr><td>Dat.</td><td><span class="gm">dem</span> alt<span class="hl">en</span> Mann</td><td><span class="gf">der</span> alt<span class="hl">en</span> Frau</td><td><span class="gn">dem</span> alt<span class="hl">en</span> Kind</td><td>den alt<span class="hl">en</span> Kindern</td></tr>
+          <tr><td>Gen.</td><td><span class="gm">des</span> alt<span class="hl">en</span> Mannes</td><td><span class="gf">der</span> alt<span class="hl">en</span> Frau</td><td><span class="gn">des</span> alt<span class="hl">en</span> Kindes</td><td>der alt<span class="hl">en</span> Kinder</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info" style="margin-top:8px"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>-e</strong> только Nom. + Akk. ж/с.р. &nbsp;·&nbsp; везде остальное <strong>-en</strong></p></div></div>
+    </div>
+    <div id="tab-adj-2" class="tab-panel">
+      <p class="rule" style="color:var(--muted-fg);font-size:12px;margin-bottom:8px">Смешанное — где артикль не показывает род (м. Nom., с. Nom./Akk.), прилагательное берёт это на себя</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>Nom.</td><td><span class="gm">ein</span> alt<span class="hl">er</span> Mann</td><td><span class="gf">eine</span> alt<span class="hl">e</span> Frau</td><td><span class="gn">ein</span> alt<span class="hl">es</span> Kind</td><td>meine alt<span class="hl">en</span></td></tr>
+          <tr><td>Akk.</td><td><span class="gm">einen</span> alt<span class="hl">en</span></td><td><span class="gf">eine</span> alt<span class="hl">e</span></td><td><span class="gn">ein</span> alt<span class="hl">es</span></td><td>meine alt<span class="hl">en</span></td></tr>
+          <tr><td>Dat.</td><td>einem alt<span class="hl">en</span></td><td><span class="gf">einer</span> alt<span class="hl">en</span></td><td>einem alt<span class="hl">en</span></td><td>meinen alt<span class="hl">en</span></td></tr>
+          <tr><td>Gen.</td><td>eines alt<span class="hl">en</span></td><td><span class="gf">einer</span> alt<span class="hl">en</span></td><td>eines alt<span class="hl">en</span></td><td>meiner alt<span class="hl">en</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info" style="margin-top:8px"><span class="alert-icon">💡</span><div class="alert-body"><p>После: ein, kein, mein, dein, sein, ihr, unser, euer, Ihr</p></div></div>
+    </div>
+    <div id="tab-adj-3" class="tab-panel">
+      <p class="rule" style="color:var(--muted-fg);font-size:12px;margin-bottom:8px">Сильное — прилагательное само несёт всю информацию о роде и падеже</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>Nom.</td><td>alt<span class="hl">er</span> Wein <span class="tr">(вино)</span></td><td>alt<span class="hl">e</span> Milch <span class="tr">(молоко)</span></td><td>alt<span class="hl">es</span> Brot <span class="tr">(хлеб)</span></td><td>alt<span class="hl">e</span> Leute <span class="tr">(люди)</span></td></tr>
+          <tr><td>Akk.</td><td>alt<span class="hl">en</span></td><td>alt<span class="hl">e</span></td><td>alt<span class="hl">es</span></td><td>alt<span class="hl">e</span></td></tr>
+          <tr><td>Dat.</td><td>alt<span class="hl">em</span></td><td>alt<span class="hl">er</span></td><td>alt<span class="hl">em</span></td><td>alt<span class="hl">en</span></td></tr>
+          <tr><td>Gen.</td><td>alt<span class="hl">en</span></td><td>alt<span class="hl">er</span></td><td>alt<span class="hl">en</span></td><td>alt<span class="hl">er</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn" style="margin-top:8px"><span class="alert-icon">⚠️</span><div class="alert-body"><ul>
+        <li>dunkel <span class="tr">(тёмный)</span> → dunkl<strong>e</strong> (выпадает -e-)</li>
+        <li>hoch <span class="tr">(высокий)</span> → hoh<strong>e</strong> (основа меняется)</li>
+      </ul></div></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Времена</span><div class="level-sep-line"></div></div>
+
+<div class="card">
+  <div class="card-header"><div class="card-title">Ось времени <span class="de">(Zeitachse)</span></div></div>
+  <div class="card-content">
+    <div class="timeline-wrap">
+      <div class="timeline-axis">
+        <div class="tl-line" style="max-width:20px"></div>
+        <div class="tl-node">
+          <div class="tl-dot tl-past"></div>
+          <span class="tl-label tl-label-past">Plusquam-<br>perfekt</span>
+          <span class="tl-sub">hatte/war<br>+ P.II</span>
+        </div>
+        <div class="tl-line"></div>
+        <div class="tl-node">
+          <div class="tl-dot tl-past"></div>
+          <span class="tl-label tl-label-past">Präteritum</span>
+          <span class="tl-sub">machte / war<br>письм. стиль</span>
+        </div>
+        <div class="tl-line"></div>
+        <div class="tl-node">
+          <div class="tl-dot tl-past"></div>
+          <span class="tl-label tl-label-past">Perfekt</span>
+          <span class="tl-sub">hat/ist<br>+ P.II</span>
+        </div>
+        <div class="tl-line"></div>
+        <div class="tl-node">
+          <div class="tl-dot tl-pres tl-now"></div>
+          <span class="tl-label tl-label-pres" style="font-size:12px;font-weight:800">Präsens</span>
+          <span class="tl-sub">mache<br>СЕЙЧАС</span>
+        </div>
+        <div class="tl-line"></div>
+        <div class="tl-node">
+          <div class="tl-dot tl-fut"></div>
+          <span class="tl-label tl-label-fut">Futur I</span>
+          <span class="tl-sub">werde<br>+ Inf.</span>
+        </div>
+        <div class="tl-line" style="max-width:20px"></div>
+      </div>
+    </div>
+    <p class="tl-caption">← прошлое &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; будущее →</p>
+  </div>
+</div>
+
+<div class="card" id="s9">
+  <div class="card-header">
+    <span class="badge badge-num">9</span>
+    <div class="card-title">Настоящее время <span class="de">(Präsens)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>machen <span class="tr">(делать)</span></th><th>arbeiten <span class="tr">(работать)</span></th></tr></thead>
+      <tbody>
+        <tr><td>ich <span class="tr">(я)</span></td><td>mache</td><td>arbeite</td></tr>
+        <tr><td>du <span class="tr">(ты)</span></td><td>machst</td><td>arbeitest</td></tr>
+        <tr><td>er/sie/es</td><td>macht</td><td>arbeitet</td></tr>
+        <tr><td>wir <span class="tr">(мы)</span></td><td>machen</td><td>arbeiten</td></tr>
+        <tr><td>ihr <span class="tr">(вы)</span></td><td>macht</td><td>arbeitet</td></tr>
+        <tr><td>sie/Sie</td><td>machen</td><td>arbeiten</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body"><p>Основа на <strong>-t/-d/-n</strong> → вставляем <strong>-e-</strong>: du arbeit<strong>e</strong>st</p></div>
+    </div>
+    <p class="rule" style="font-weight:600">Чередование гласных (сильные глаголы):</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Тип</th><th>Глагол</th><th>du / er</th></tr></thead>
+      <tbody>
+        <tr><td>a → ä</td><td>fahren <span class="tr">(ехать)</span></td><td>fährst / fährt</td></tr>
+        <tr><td>e → i</td><td>geben <span class="tr">(давать)</span></td><td>gibst / gibt</td></tr>
+        <tr><td>e → ie</td><td>sehen <span class="tr">(видеть)</span></td><td>siehst / sieht</td></tr>
+      </tbody>
+    </table></div>
+    <p class="rule" style="font-weight:600">Главные неправильные:</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Инфинитив</th><th>ich</th><th>du</th><th>er/sie</th></tr></thead>
+      <tbody>
+        <tr><td>sein <span class="tr">(быть)</span></td><td>bin</td><td>bist</td><td>ist</td></tr>
+        <tr><td>haben <span class="tr">(иметь)</span></td><td>habe</td><td>hast</td><td>hat</td></tr>
+        <tr><td>werden <span class="tr">(становиться)</span></td><td>werde</td><td>wirst</td><td>wird</td></tr>
+        <tr><td>wissen <span class="tr">(знать)</span></td><td>weiß</td><td>weißt</td><td>weiß</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<div class="card" id="s10">
+  <div class="card-header"><span class="badge badge-num">10</span><div class="card-title">Перфект <span class="de">(Perfekt)</span></div></div>
+  <div class="card-content">
+    <div class="formula">
+      <span class="f-slot f-subj">Subjekt</span><span class="f-plus">+</span>
+      <span class="f-slot f-aux">haben / sein</span><span class="f-plus">+</span>
+      <span class="f-mid">… +</span>
+      <span class="f-slot f-part">Partizip II</span>
+    </div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>haben/sein</strong> на 2-м месте, Partizip II — в <strong>конце</strong></p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Тип</th><th>Правило</th><th>Примеры</th></tr></thead>
+      <tbody>
+        <tr><td>Правильные</td><td><strong>ge-</strong> + основа + <strong>-t</strong></td><td>gemacht <span class="tr">(сделал)</span>, gespielt <span class="tr">(играл)</span></td></tr>
+        <tr><td>На <code>-ieren</code></td><td>без ge-!</td><td>studiert <span class="tr">(учился)</span>, telefoniert <span class="tr">(звонил)</span></td></tr>
+        <tr><td>Неотдел. приставки</td><td>без ge-!</td><td>besucht <span class="tr">(посетил)</span>, erklärt <span class="tr">(объяснил)</span></td></tr>
+        <tr><td>Сильные</td><td><strong>ge-</strong> + изм. основа + <strong>-en</strong></td><td>geschrieben <span class="tr">(написал)</span>, gesungen <span class="tr">(пел)</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>haben</th><th>sein</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>переходные + большинство глаголов</td>
+          <td>
+            fahren <span class="tr">(ехать)</span>, gehen <span class="tr">(идти)</span>, laufen <span class="tr">(бежать)</span>, fliegen <span class="tr">(летать)</span>, kommen <span class="tr">(прийти)</span><br>
+            werden <span class="tr">(стать)</span>, sterben <span class="tr">(умереть)</span>, aufwachen <span class="tr">(проснуться)</span>, einschlafen <span class="tr">(заснуть)</span><br>
+            bleiben <span class="tr">(остаться)</span>
+          </td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>schlafen <span class="tr">(спать)</span>, liegen <span class="tr">(лежать)</span>, sitzen <span class="tr">(сидеть)</span>, stehen <span class="tr">(стоять)</span>, hängen <span class="tr">(висеть)</span> → <strong>haben</strong></p></div></div>
+    <details class="detail-block">
+      <summary>📖 haben / sein — подробнее</summary>
+      <div class="detail-inner">
+        <div class="hs-cols">
+          <!-- LEFT: sein -->
+          <div class="hs-col">
+            <div class="hs-rule-cell hs-sein">
+              <span class="hs-aux">sein</span>
+              <span class="hs-crit">движение A→B · смена состояния</span>
+            </div>
+            <p class="hs-label">🚀 Движение</p>
+            <div class="hs-chips">
+              <span class="hs-chip hs-c-sein"><b>gehen</b> <code>gegangen</code> <span class="tr">(идти)</span></span>
+              <span class="hs-chip hs-c-sein"><b>kommen</b> <code>gekommen</code> <span class="tr">(прийти)</span></span>
+              <span class="hs-chip hs-c-sein"><b>fahren</b> <code>gefahren</code> <span class="tr">(ехать)</span></span>
+              <span class="hs-chip hs-c-sein"><b>fliegen</b> <code>geflogen</code> <span class="tr">(лететь)</span></span>
+              <span class="hs-chip hs-c-sein"><b>laufen</b> <code>gelaufen</code> <span class="tr">(бежать)</span></span>
+              <span class="hs-chip hs-c-sein"><b>reisen</b> <code>gereist</code> <span class="tr">(путешествовать)</span></span>
+              <span class="hs-chip hs-c-sein"><b>schwimmen</b> <code>geschwommen</code> <span class="tr">(плыть)</span></span>
+              <span class="hs-chip hs-c-sein"><b>fallen</b> <code>gefallen</code> <span class="tr">(падать)</span></span>
+              <span class="hs-chip hs-c-sein"><b>steigen</b> <code>gestiegen</code> <span class="tr">(подниматься)</span></span>
+              <span class="hs-chip hs-c-sein"><b>klettern</b> <code>geklettert</code> <span class="tr">(карабкаться)</span></span>
+            </div>
+            <p class="hs-label">🔄 Смена состояния</p>
+            <div class="hs-chips">
+              <span class="hs-chip hs-c-sein"><b>werden</b> <code>geworden</code> <span class="tr">(стать)</span></span>
+              <span class="hs-chip hs-c-sein"><b>sterben</b> <code>gestorben</code> <span class="tr">(умереть)</span></span>
+              <span class="hs-chip hs-c-sein"><b>aufwachen</b> <code>aufgewacht</code> <span class="tr">(проснуться)</span></span>
+              <span class="hs-chip hs-c-sein"><b>einschlafen</b> <code>eingeschlafen</code> <span class="tr">(заснуть)</span></span>
+              <span class="hs-chip hs-c-sein"><b>bleiben</b> <code>geblieben</code> <span class="tr">(остаться)</span></span>
+              <span class="hs-chip hs-c-sein"><b>sein</b> <code>gewesen</code> <span class="tr">(быть)</span></span>
+            </div>
+          </div>
+          <!-- RIGHT: haben -->
+          <div class="hs-col">
+            <div class="hs-rule-cell hs-haben">
+              <span class="hs-aux">haben</span>
+              <span class="hs-crit">переходные глаголы <span class="hs-hint">(есть объект: кого? что?)</span> · все остальные</span>
+            </div>
+            <p class="hs-label">⚠️ Ловушка — похожи на движение</p>
+            <div class="hs-chips">
+              <span class="hs-chip hs-c-haben"><b>schlafen</b> <code>geschlafen</code> <span class="tr">(спать)</span></span>
+              <span class="hs-chip hs-c-haben"><b>liegen</b> <code>gelegen</code> <span class="tr">(лежать)</span></span>
+              <span class="hs-chip hs-c-haben"><b>sitzen</b> <code>gesessen</code> <span class="tr">(сидеть)</span></span>
+              <span class="hs-chip hs-c-haben"><b>stehen</b> <code>gestanden</code> <span class="tr">(стоять)</span></span>
+              <span class="hs-chip hs-c-haben"><b>hängen</b> <code>gehangen</code> <span class="tr">(висеть)</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="s11">
+  <div class="card-header"><span class="badge badge-num">11</span><div class="card-title">Претеритум <span class="de">(Präteritum)</span></div></div>
+  <div class="card-content">
+    <div class="formula">
+      <span class="f-slot f-subj">Subjekt</span><span class="f-plus">+</span>
+      <span class="f-slot f-aux">Stamm + -te</span>
+      <span class="f-mid">/ нерег. форма</span><span class="f-plus">+</span>
+      <span class="f-mid">… (основное действие)</span>
+    </div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Правильные: основа + <strong>-te-</strong>: ich machte <span class="tr">(делал)</span> &nbsp;·&nbsp; sein, haben, модальные → <strong>всегда Präteritum!</strong></p></div></div>
+    <div class="tbl-2col">
+      <table><thead><tr><th>Инфинитив</th><th>Prät.</th><th>Part. II</th></tr></thead><tbody><tr><td>sein <span class="tr">(быть)</span></td><td class="vf">war</td><td>gewesen</td></tr><tr><td>haben <span class="tr">(иметь)</span></td><td class="vf">hatte</td><td>gehabt</td></tr><tr><td>werden <span class="tr">(стать)</span></td><td class="vf">wurde</td><td>geworden</td></tr><tr><td>gehen <span class="tr">(идти)</span></td><td class="vf">ging</td><td>gegangen</td></tr><tr><td>kommen <span class="tr">(прийти)</span></td><td class="vf">kam</td><td>gekommen</td></tr><tr><td>fahren <span class="tr">(ехать)</span></td><td class="vf">fuhr</td><td>gefahren</td></tr><tr><td>schreiben <span class="tr">(писать)</span></td><td class="vf">schrieb</td><td>geschrieben</td></tr><tr><td>sprechen <span class="tr">(говорить)</span></td><td class="vf">sprach</td><td>gesprochen</td></tr></tbody></table>
+      <table><thead><tr><th>Инфинитив</th><th>Prät.</th><th>Part. II</th></tr></thead><tbody><tr><td>sehen <span class="tr">(видеть)</span></td><td class="vf">sah</td><td>gesehen</td></tr><tr><td>geben <span class="tr">(давать)</span></td><td class="vf">gab</td><td>gegeben</td></tr><tr><td>nehmen <span class="tr">(брать)</span></td><td class="vf">nahm</td><td>genommen</td></tr><tr><td>stehen <span class="tr">(стоять)</span></td><td class="vf">stand</td><td>gestanden</td></tr><tr><td>finden <span class="tr">(находить)</span></td><td class="vf">fand</td><td>gefunden</td></tr><tr><td>denken <span class="tr">(думать)</span></td><td class="vf">dachte</td><td>gedacht</td></tr><tr><td>bringen <span class="tr">(приносить)</span></td><td class="vf">brachte</td><td>gebracht</td></tr><tr><td>wissen <span class="tr">(знать)</span></td><td class="vf">wusste</td><td>gewusst</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div class="card-2col">
+<div class="card" id="s12">
+  <div class="card-header"><span class="badge badge-num">12</span><div class="card-title">Предпрошедшее время <span class="de">(Plusquamperfekt)</span></div></div>
+  <div class="card-content">
+    <div class="formula">
+      <span class="f-slot f-subj">Subjekt</span><span class="f-plus">+</span>
+      <span class="f-slot f-aux">hatte / war</span><span class="f-plus">+</span>
+      <span class="f-mid">… +</span>
+      <span class="f-slot f-part">Partizip II</span>
+    </div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>hatte / war + Partizip II</strong> — то, что произошло <em>раньше</em> другого события в прошлом</p></div></div>
+    <div class="alert alert-warn"><span class="alert-icon">🔑</span><div class="alert-body">
+      <p class="alert-title">Главное: nachdem + Plusquamperfekt</p>
+      <p><em>Nachdem er gegessen <strong>hatte</strong>, ging er spazieren <span class="tr">(гулять)</span>.</em></p>
+      <p><em>Nachdem wir angekommen <span class="tr">(прибыли)</span> <strong>waren</strong>, riefen wir an <span class="tr">(позвонили)</span>.</em></p>
+    </div></div>
+  </div>
+</div>
+
+<div class="card" id="s13">
+  <div class="card-header"><span class="badge badge-num">13</span><div class="card-title">Будущее время <span class="de">(Futur I)</span></div></div>
+  <div class="card-content">
+    <div class="formula">
+      <span class="f-slot f-subj">Subjekt</span><span class="f-plus">+</span>
+      <span class="f-slot f-aux">werden</span><span class="f-plus">+</span>
+      <span class="f-mid">… +</span>
+      <span class="f-slot f-inf">Infinitiv</span>
+    </div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>werden + Infinitiv</strong> → <em>Ich werde morgen <span class="tr">(завтра)</span> kommen <span class="tr">(прийти)</span>.</em></p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Употребление</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td>Предположение</td><td><em>Er wird wohl <span class="tr">(наверное)</span> krank <span class="tr">(болен)</span> sein.</em></td></tr>
+        <tr><td>Намерение (формально)</td><td><em>Ich werde es erledigen <span class="tr">(сделать)</span>.</em></td></tr>
+        <tr><td>В разговоре</td><td>Präsens + время: <em>Ich komme morgen.</em></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p><em>Er <strong>wird</strong> Arzt <span class="tr">(врач)</span>.</em> = становится врачом (Präsens, не Futur!)</p></div></div>
+  </div>
+</div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Наклонения и залог</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s14">
+  <div class="card-header"><span class="badge badge-num">14</span><div class="card-title">Повелительное наклонение <span class="de">(Imperativ)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>kommen <span class="tr">(приходить)</span></th><th>sein <span class="tr">(быть)</span></th><th>lesen <span class="tr">(читать)</span></th><th>nehmen <span class="tr">(брать)</span></th></tr></thead>
+      <tbody>
+        <tr><td>du <span class="tr">(ты)</span></td><td>Komm!</td><td class="hl">Sei!</td><td class="hl">Lies!</td><td class="hl">Nimm!</td></tr>
+        <tr><td>ihr <span class="tr">(вы)</span></td><td>Kommt!</td><td class="hl">Seid!</td><td>Lest!</td><td>Nehmt!</td></tr>
+        <tr><td>Sie <span class="tr">(Вы)</span></td><td>Kommen Sie!</td><td class="hl">Seien Sie!</td><td>Lesen Sie!</td><td>Nehmen Sie!</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>e→i/ie глаголы сохраняют изменение: <strong>Lies!</strong>, <strong>Nimm!</strong> &nbsp;·&nbsp; -e обязательна у основ на -t/-d/-n: Arbeite! <span class="tr">(Работай!)</span></p></div></div>
+  </div>
+</div>
+
+<div class="card" id="s15">
+  <div class="card-header"><span class="badge badge-num">15</span><div class="card-title">Конъюнктив II <span class="de">(Konjunktiv II)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Глагол</th><th>K-II (ich)</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>sein <span class="tr">(быть)</span></td><td class="vf">wäre</td><td><span class="tr">я бы был</span></td></tr>
+        <tr><td>haben <span class="tr">(иметь)</span></td><td class="vf">hätte</td><td><span class="tr">я бы имел</span></td></tr>
+        <tr><td>werden <span class="tr">(становиться)</span></td><td class="vf">würde</td><td><span class="tr">я бы…</span></td></tr>
+        <tr><td>können <span class="tr">(мочь)</span></td><td class="vf">könnte</td><td><span class="tr">я бы мог</span></td></tr>
+        <tr><td>müssen <span class="tr">(должен)</span></td><td class="vf">müsste</td><td><span class="tr">я бы должен</span></td></tr>
+        <tr><td>dürfen <span class="tr">(сметь)</span></td><td class="vf">dürfte</td><td><span class="tr">мне бы было разрешено</span></td></tr>
+        <tr><td>wollen <span class="tr">(хотеть)</span></td><td class="vf">wollte</td><td><span class="tr">я хотел бы</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Все остальные: <strong>würde + Infinitiv</strong> → <em>Ich <strong>würde</strong> gern kommen <span class="tr">(прийти)</span>.</em></p></div></div>
+    <ul class="rlist">
+      <li>Вежливо: <em>Könnten Sie mir helfen <span class="tr">(помочь)</span>?</em></li>
+      <li>Условие: <em>Wenn ich Zeit <span class="tr">(время)</span> <strong>hätte</strong>, <strong>würde</strong> ich kommen.</em></li>
+      <li>Желание: <em>Ich <strong>wäre</strong> gern reich <span class="tr">(богатым)</span>.</em></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════ B1 ═══════════════ -->
+
+<div class="card" id="s16">
+  <div class="card-header"><span class="badge badge-num">16</span><div class="card-title">Конъюнктив II прошедшего <span class="de">(Konjunktiv II Vergangenheit)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>hätte / wäre + Partizip II</strong> — нереальное в прошлом</p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Глагол</th><th>Наст./Буд. (нереал.)</th><th>Прошлое (нереал.)</th></tr></thead>
+      <tbody>
+        <tr><td>sein <span class="tr">(быть)</span></td><td class="vf">wäre <span class="tr">(был бы)</span></td><td class="vf">wäre gewesen</td></tr>
+        <tr><td>haben <span class="tr">(иметь)</span></td><td class="vf">hätte <span class="tr">(имел бы)</span></td><td class="vf">hätte gehabt</td></tr>
+        <tr><td>kommen <span class="tr">(прийти)</span></td><td>würde kommen</td><td class="vf">wäre gekommen <span class="tr">(пришёл бы)</span></td></tr>
+        <tr><td>machen <span class="tr">(делать)</span></td><td>würde machen</td><td class="vf">hätte gemacht <span class="tr">(сделал бы)</span></td></tr>
+      </tbody>
+    </table></div>
+    <ul class="rlist">
+      <li><em>Wenn ich Zeit <span class="tr">(время)</span> <strong>hätte</strong>, <strong>würde</strong> ich kommen.</em> — сейчас, нереально</li>
+      <li><em>Wenn ich Zeit <strong>gehabt hätte</strong>, <strong>wäre</strong> ich gekommen.</em> — в прошлом, нереально</li>
+      <li><em>Du <strong>hättest</strong> früher <span class="tr">(раньше)</span> kommen <strong>sollen</strong>.</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" id="s17">
+  <div class="card-header"><span class="badge badge-num">17</span><div class="card-title">Пассивный залог <span class="de">(Passiv)</span></div></div>
+  <div class="card-content">
+    <div class="formula">
+      <span class="f-slot f-subj">Объект → Subjekt</span><span class="f-plus">+</span>
+      <span class="f-slot f-aux">wird / wurde</span><span class="f-plus">+</span>
+      <span class="f-mid">… +</span>
+      <span class="f-slot f-part">Partizip II</span>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Время</th><th>Структура</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td>Präsens</td><td>wird + P.II</td><td><em>Das Buch <span class="tr">(книга)</span> <strong>wird gelesen</strong> <span class="tr">(читается)</span>.</em></td></tr>
+        <tr><td>Präteritum</td><td>wurde + P.II</td><td><em>Das Buch <strong>wurde gelesen</strong> <span class="tr">(была прочитана)</span>.</em></td></tr>
+        <tr><td>Perfekt</td><td>ist + P.II + <span class="hl">worden</span></td><td><em>Das Buch <strong>ist gelesen worden</strong> <span class="tr">(была прочитана)</span>.</em></td></tr>
+        <tr><td>Konjunktiv II</td><td>würde + P.II + werden</td><td><em>Das Buch <strong>würde gelesen werden</strong> <span class="tr">(была бы прочитана)</span>.</em></td></tr>
+      </tbody>
+    </table></div>
+    <ul class="rlist">
+      <li>Кто действует: <strong>von + Dativ</strong> → <em>von dem Lehrer <span class="tr">(учителем)</span></em></li>
+      <li>Инструмент: <strong>durch + Akkusativ</strong> → <em>durch den Wind <span class="tr">(ветром)</span></em></li>
+    </ul>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>Zustandspassiv: <em>Die Tür <strong>ist geöffnet</strong> <span class="tr">(уже открыта)</span></em> — состояние, а не процесс &nbsp;·&nbsp; Perfekt Passiv: <strong>worden</strong> (не geworden!)</p></div></div>
+  </div>
+</div>
+
+
+<div class="card" id="s29">
+  <div class="card-header"><span class="badge badge-num">29</span><div class="card-title">Косвенная речь <span class="de">(Indirekte Rede / Konjunktiv I)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Для передачи чужих слов: <strong>Konjunktiv I</strong> (формально) или <strong>Konjunktiv II</strong> (если K-I = Indikativ)</p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>sein <span class="tr">(быть)</span></th><th>haben <span class="tr">(иметь)</span></th><th>können <span class="tr">(мочь)</span></th><th>machen <span class="tr">(делать)</span></th></tr></thead>
+      <tbody>
+        <tr><td>ich</td><td>sei</td><td>habe</td><td>könne</td><td>mache</td></tr>
+        <tr><td>du</td><td>sei(e)st</td><td>habest</td><td>könnest</td><td>machest</td></tr>
+        <tr><td>er/sie/es</td><td class="vf">sei</td><td class="vf">habe</td><td class="vf">könne</td><td class="vf">mache</td></tr>
+        <tr><td>wir</td><td>seien</td><td>haben→<span class="vf">hätten</span></td><td>können→<span class="vf">könnten</span></td><td>machen→<span class="vf">würden m.</span></td></tr>
+        <tr><td>sie/Sie</td><td>seien</td><td>haben→<span class="vf">hätten</span></td><td>können→<span class="vf">könnten</span></td><td>machen→<span class="vf">würden m.</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>Если K-I = Indikativ (wir haben = wir haben), используем <strong>K-II</strong>: <em>Sie sagten, sie <strong>hätten</strong> keine Zeit.</em></p></div></div>
+    <ul class="rlist">
+      <li><strong>Прямая:</strong> <em>Er sagt: «Ich <strong>bin</strong> müde <span class="tr">(устал)</span>.»</em></li>
+      <li><strong>Косвенная:</strong> <em>Er sagt, er <strong>sei</strong> müde.</em></li>
+      <li><strong>Прошлое:</strong> <em>Er sagte <span class="tr">(сказал)</span>, er <strong>habe</strong> gut geschlafen <span class="tr">(спал)</span>.</em></li>
+      <li><strong>С dass:</strong> <em>Er sagte, <strong>dass</strong> er müde <strong>sei</strong>.</em></li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Глаголы</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s18">
+  <div class="card-header">
+    <span class="badge badge-num">18</span>
+    <div class="card-title">Модальные глаголы <span class="de">(Modalverben)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>können <span class="tr">(мочь)</span></th><th>müssen <span class="tr">(должен)</span></th><th>dürfen <span class="tr">(сметь)</span></th><th>wollen <span class="tr">(хотеть)</span></th><th>sollen <span class="tr">(должен внеш.)</span></th><th>möchten <span class="tr">(хотел бы)</span></th></tr></thead>
+      <tbody>
+        <tr><td>ich</td><td>kann</td><td>muss</td><td>darf</td><td>will</td><td>soll</td><td>möchte</td></tr>
+        <tr><td>du</td><td>kannst</td><td>musst</td><td>darfst</td><td>willst</td><td>sollst</td><td>möchtest</td></tr>
+        <tr><td>er/sie</td><td>kann</td><td>muss</td><td>darf</td><td>will</td><td>soll</td><td>möchte</td></tr>
+        <tr><td>wir</td><td>können</td><td>müssen</td><td>dürfen</td><td>wollen</td><td>sollen</td><td>möchten</td></tr>
+        <tr><td>ihr</td><td>könnt</td><td>müsst</td><td>dürft</td><td>wollt</td><td>sollt</td><td>möchtet</td></tr>
+        <tr><td>sie/Sie</td><td>können</td><td>müssen</td><td>dürfen</td><td>wollen</td><td>sollen</td><td>möchten</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body"><p>Modal + … + <strong>Infinitiv</strong> (в конце) → <em>Ich kann gut schwimmen <span class="tr">(плавать)</span>.</em></p></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="s19">
+  <div class="card-header"><span class="badge badge-num">19</span><div class="card-title">Отделяемые приставки <span class="de">(Trennbare Verben)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><em>Ich <strong>rufe</strong> dich morgen <span class="tr">(завтра)</span> <strong>an</strong>.</em> — anrufen <span class="tr">(звонить)</span>: приставка уходит в конец</p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Частые отделяемые</th><th>Значение</th><th>Частые неотделяемые</th></tr></thead>
+      <tbody>
+        <tr><td>an- <span class="tr">(к)</span>, auf- <span class="tr">(на/от-)</span>, aus- <span class="tr">(из/вы-)</span>, ein- <span class="tr">(в)</span><br>mit- <span class="tr">(с)</span>, ab- <span class="tr">(от)</span>, nach- <span class="tr">(за)</span>, weiter- <span class="tr">(дальше)</span><br>zurück- <span class="tr">(обратно)</span>, vor- <span class="tr">(перед)</span>, weg- <span class="tr">(прочь)</span></td><td><span class="tr">Ударение на приставке!</span></td><td>be-, er-, ge-, ver-<br>zer-, ent-, emp-, miss-<br><span class="tr">Ударение на корне!</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>durch-, über-, unter-, um- могут быть обоими: <em>übersetzen</em> <span class="tr">(переводить)</span> vs. <em>über<strong>setzen</strong></em> <span class="tr">(перевозить)</span></p></div></div>
+  </div>
+</div>
+
+<div class="card" id="s20">
+  <div class="card-header"><span class="badge badge-num">20</span><div class="card-title">Рефлексивные глаголы <span class="de">(Reflexive Verben)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Pronomen</th><th>Akk.</th><th>Dat.</th></tr></thead>
+      <tbody>
+        <tr><td>ich <span class="tr">(я)</span></td><td>mich <span class="tr">(себя)</span></td><td>mir <span class="tr">(себе)</span></td></tr>
+        <tr><td>du <span class="tr">(ты)</span></td><td>dich</td><td>dir</td></tr>
+        <tr><td>er/sie/es/man</td><td>sich</td><td>sich</td></tr>
+        <tr><td>wir/ihr/sie/Sie</td><td>uns / euch / sich</td><td>uns / euch / sich</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Глагол</th><th>Перевод</th><th>Предлог</th></tr></thead>
+      <tbody>
+        <tr><td>sich freuen</td><td>радоваться</td><td>auf <span class="tr">(ожидая)</span> / über <span class="tr">(о случившемся)</span></td></tr>
+        <tr><td>sich interessieren</td><td>интересоваться</td><td>für <span class="tr">(чем-то)</span></td></tr>
+        <tr><td>sich erinnern</td><td>вспоминать</td><td>an <span class="tr">(о)</span></td></tr>
+        <tr><td>sich kümmern</td><td>заботиться</td><td>um <span class="tr">(о)</span></td></tr>
+        <tr><td>sich bewerben</td><td>подавать заявку</td><td>um <span class="tr">(на)</span></td></tr>
+        <tr><td>sich entscheiden</td><td>решать</td><td>für <span class="tr">(за)</span></td></tr>
+        <tr><td>sich befinden / fühlen</td><td>находиться / чувствовать себя</td><td>—</td></tr>
+        <tr><td>sich vorstellen</td><td>представляться / воображать</td><td>—</td></tr>
+        <tr><td>sich setzen / legen</td><td>садиться / ложиться</td><td>—</td></tr>
+        <tr><td>sich beeilen</td><td>торопиться</td><td>—</td></tr>
+        <tr><td>sich ärgern</td><td>злиться</td><td>über <span class="tr">(из-за)</span></td></tr>
+        <tr><td>sich wünschen</td><td>желать</td><td>—</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<div class="card" id="s21">
+  <div class="card-header"><span class="badge badge-num">21</span><div class="card-title">Инфинитив с zu <span class="de">(Infinitiv mit zu)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Структура: … + <strong>zu + Infinitiv</strong> (в конце)</p></div></div>
+    <p class="rule">anfangen <span class="tr">(начинать)</span>, aufhören <span class="tr">(прекращать)</span>, vergessen <span class="tr">(забывать)</span>, versuchen <span class="tr">(пытаться)</span>, vorhaben <span class="tr">(планировать)</span>, hoffen <span class="tr">(надеяться)</span>, empfehlen <span class="tr">(рекомендовать)</span>, bitten <span class="tr">(просить)</span>, erlauben <span class="tr">(разрешать)</span>, verbieten <span class="tr">(запрещать)</span></p>
+    <p class="rule">Отделяемые: zu вставляется внутрь → auf<strong>zu</strong>machen <span class="tr">(открыть)</span></p>
+    <p class="rule"><strong>um…zu</strong> = чтобы → <em>Ich lerne Deutsch, <strong>um</strong> zu arbeiten <span class="tr">(работать)</span>.</em></p>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body">
+      <p>zu НЕ нужно после:</p>
+      <ul>
+        <li>Модальных глаголов: <em>Ich muss kommen.</em></li>
+        <li>lassen <span class="tr">(давать)</span>, sehen <span class="tr">(видеть)</span>, hören <span class="tr">(слышать)</span>, helfen <span class="tr">(помогать)</span></li>
+        <li>bleiben <span class="tr">(оставаться)</span> + движение: <em>Er bleibt stehen <span class="tr">(стоит)</span>.</em></li>
+      </ul>
+    </div></div>
+  </div>
+</div>
+
+
+<div class="card" id="s30">
+  <div class="card-header"><span class="badge badge-num">30</span><div class="card-title">Глагол lassen <span class="de">(Verb lassen)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Значение</th><th>Пример</th><th>Перевод</th></tr></thead>
+      <tbody>
+        <tr><td><strong>каузатив</strong> <span class="tr">(поручить кому-то)</span></td><td><em>Ich <strong>lasse</strong> mir die Haare schneiden.</em></td><td><span class="tr">Я стригу волосы (у парикмахера).</span></td></tr>
+        <tr><td><strong>разрешать</strong></td><td><em>Er <strong>lässt</strong> mich fahren.</em></td><td><span class="tr">Он позволяет мне ехать.</span></td></tr>
+        <tr><td><strong>оставить</strong></td><td><em>Lass das Fenster <span class="tr">(окно)</span> offen <span class="tr">(открытым)</span>!</em></td><td><span class="tr">Оставь окно открытым!</span></td></tr>
+        <tr><td><strong>sich lassen</strong> = можно</td><td><em>Das <strong>lässt sich</strong> machen.</em></td><td><span class="tr">Это можно сделать.</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Спряжение: ich lasse, du <strong>lässt</strong>, er lässt, wir lassen &nbsp;·&nbsp; Prät.: <strong>ließ</strong> &nbsp;·&nbsp; Perf.: hat … <strong>lassen</strong> (двойной инфинитив, не «gelassen»!)</p></div></div>
+    <ul class="rlist">
+      <li><em>Er hat das Auto reparieren <strong>lassen</strong>.</em> <span class="tr">(Он дал починить машину.)</span></li>
+      <li><em>Lass uns gehen!</em> <span class="tr">(Пойдём! = Let's go!)</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" id="s31">
+  <div class="card-header"><span class="badge badge-num">31</span><div class="card-title">Глаголы с предлогами <span class="de">(Verben mit Präpositionen)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Предлог закреплён за глаголом и определяет падеж. Учить как целое!</p></div></div>
+    <p class="rule" style="font-weight:600;margin-bottom:6px">Akkusativ:</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Глагол</th><th>Перевод</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td>warten <strong>auf</strong></td><td><span class="tr">ждать (кого/что)</span></td><td><em>Ich warte <strong>auf</strong> den Bus.</em></td></tr>
+        <tr><td>sich freuen <strong>auf</strong></td><td><span class="tr">предвкушать</span></td><td><em>Ich freue mich <strong>auf</strong> den Urlaub <span class="tr">(отпуск)</span>.</em></td></tr>
+        <tr><td>sich freuen <strong>über</strong></td><td><span class="tr">радоваться (свершившемуся)</span></td><td><em>Ich freue mich <strong>über</strong> das Geschenk <span class="tr">(подарок)</span>.</em></td></tr>
+        <tr><td>denken <strong>an</strong></td><td><span class="tr">думать о</span></td><td><em>Ich denke <strong>an</strong> dich.</em></td></tr>
+        <tr><td>sich gewöhnen <strong>an</strong></td><td><span class="tr">привыкать к</span></td><td><em>Ich gewöhne mich <strong>an</strong> das Klima <span class="tr">(климат)</span>.</em></td></tr>
+        <tr><td>sorgen <strong>für</strong></td><td><span class="tr">заботиться о</span></td><td><em>Sie sorgt <strong>für</strong> die Kinder.</em></td></tr>
+        <tr><td>sich interessieren <strong>für</strong></td><td><span class="tr">интересоваться</span></td><td><em>Er interessiert sich <strong>für</strong> Musik.</em></td></tr>
+        <tr><td>sich bewerben <strong>um</strong></td><td><span class="tr">подавать заявку на</span></td><td><em>Sie bewirbt sich <strong>um</strong> die Stelle <span class="tr">(должность)</span>.</em></td></tr>
+        <tr><td>sich entschuldigen <strong>für</strong></td><td><span class="tr">извиняться за</span></td><td><em>Er entschuldigt sich <strong>für</strong> den Fehler <span class="tr">(ошибку)</span>.</em></td></tr>
+      </tbody>
+    </table></div>
+    <p class="rule" style="font-weight:600;margin-bottom:6px;margin-top:12px">Dativ:</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Глагол</th><th>Перевод</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td>teilnehmen <strong>an</strong></td><td><span class="tr">участвовать в</span></td><td><em>Er nimmt <strong>am</strong> Kurs <span class="tr">(курсе)</span> teil.</em></td></tr>
+        <tr><td>sich erkundigen <strong>nach</strong></td><td><span class="tr">узнавать о</span></td><td><em>Ich erkundige mich <strong>nach</strong> dem Preis <span class="tr">(цене)</span>.</em></td></tr>
+        <tr><td>bestehen <strong>aus</strong></td><td><span class="tr">состоять из</span></td><td><em>Das Team besteht <strong>aus</strong> fünf <span class="tr">(пяти)</span> Personen.</em></td></tr>
+        <tr><td>träumen <strong>von</strong></td><td><span class="tr">мечтать о</span></td><td><em>Sie träumt <strong>von</strong> einer Reise <span class="tr">(путешествии)</span>.</em></td></tr>
+        <tr><td>Angst haben <strong>vor</strong></td><td><span class="tr">бояться</span></td><td><em>Er hat Angst <strong>vor</strong> Spinnen <span class="tr">(пауками)</span>.</em></td></tr>
+        <tr><td>gehören <strong>zu</strong></td><td><span class="tr">относиться к</span></td><td><em>Das gehört <strong>zum</strong> Plan <span class="tr">(плану)</span>.</em></td></tr>
+        <tr><td>sprechen <strong>mit</strong></td><td><span class="tr">говорить с</span></td><td><em>Ich spreche <strong>mit</strong> dem Chef <span class="tr">(шефом)</span>.</em></td></tr>
+        <tr><td>sprechen <strong>über</strong> + Akk.</td><td><span class="tr">говорить о</span></td><td><em>Wir sprechen <strong>über</strong> das Thema <span class="tr">(тему)</span>.</em></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>da-/wo- заменяют предлог+местоимение для <strong>вещей</strong>: <em>Ich warte <strong>darauf</strong>.</em> Для людей: <em>Ich warte <strong>auf ihn</strong>.</em></p></div></div>
+  </div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Предложения и связи</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s22">
+  <div class="card-header">
+    <span class="badge badge-num">22</span>
+    <div class="card-title">Порядок слов <span class="de">(Wortstellung)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body"><p>Глагол — всегда на <strong>2-м месте</strong> в главном предложении</p></div>
+    </div>
+    <pre><span class="ex-s">Ich</span>    <span class="ex-v">kaufe</span>   <span class="ex-a">heute</span>   <span class="ex-o">einen Apfel</span>.
+<span class="tr">я      покупаю сегодня яблоко</span>
+
+<span class="ex-a">Heute</span>  <span class="ex-v">kaufe</span>   <span class="ex-s">ich</span>     <span class="ex-o">einen Apfel</span>.
+<span class="tr">сегодня покупаю я      яблоко</span></pre>
+    <div class="ex-legend">
+      <span><span class="ex-s">■</span> подлежащее (Subjekt)</span>
+      <span><span class="ex-v">■</span> глагол (Verb/2-е место)</span>
+      <span><span class="ex-o">■</span> дополнение (Objekt)</span>
+      <span><span class="ex-a">■</span> обстоятельство (Adverb)</span>
+    </div>
+    <p class="rule" style="font-weight:600">Порядок обстоятельств — TeKaMoLo:</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Te — Temporal</th><th>Ka — Kausal</th><th>Mo — Modal</th><th>Lo — Lokal</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>когда? <em>morgen <span class="tr">(завтра)</span></em></td>
+          <td>почему? <em>wegen der Arbeit <span class="tr">(из-за работы)</span></em></td>
+          <td>как? <em>mit dem Zug <span class="tr">(на поезде)</span></em></td>
+          <td>куда? <em>nach Berlin <span class="tr">(в Берлин)</span></em></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ═══════════════ A2 ═══════════════ -->
+
+<div class="card" id="s23">
+  <div class="card-header"><span class="badge badge-num">23</span><div class="card-title">Придаточные предложения <span class="de">(Nebensätze)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Глагол — в <strong>конец</strong> придаточного!</p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Союз</th><th>Значение</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>dass</strong></td><td>что</td><td><em>Ich weiß <span class="tr">(знаю)</span>, dass er kommt.</em></td></tr>
+        <tr><td><strong>weil</strong></td><td>потому что</td><td><em>Ich bleibe <span class="tr">(остаюсь)</span>, weil es regnet <span class="tr">(дождь)</span>.</em></td></tr>
+        <tr><td><strong>obwohl</strong></td><td>хотя</td><td><em>Er kommt, obwohl er krank <span class="tr">(болен)</span> ist.</em></td></tr>
+        <tr><td><strong>wenn</strong></td><td>если/когда (повт.)</td><td><em>Wenn ich Zeit <span class="tr">(время)</span> habe, komme ich.</em></td></tr>
+        <tr><td><strong>als</strong></td><td>когда (однократно)</td><td><em>Als ich jung <span class="tr">(молодой)</span> war…</em></td></tr>
+        <tr><td><strong>ob</strong></td><td>ли (косв. вопрос)</td><td><em>Ich frage <span class="tr">(спрашиваю)</span>, ob er kommt.</em></td></tr>
+        <tr><td><strong>damit</strong></td><td>чтобы (разн. подлеж.)</td><td><em>Ich helfe <span class="tr">(помогаю)</span> dir, damit du es schaffst <span class="tr">(справишься)</span>.</em></td></tr>
+        <tr><td><strong>bevor</strong></td><td>прежде чем</td><td><em>Bevor ich gehe <span class="tr">(иду)</span>, esse ich.</em></td></tr>
+        <tr><td><strong>nachdem</strong></td><td>после того как</td><td><em>Nachdem er gegessen <span class="tr">(поел)</span> hat…</em></td></tr>
+        <tr><td><strong>während</strong></td><td>пока / в то время как</td><td><em>Während sie kocht <span class="tr">(готовит)</span>, lese ich.</em></td></tr>
+        <tr><td><strong>seit(dem)</strong></td><td>с тех пор как</td><td><em>Seitdem er hier wohnt <span class="tr">(живёт)</span>…</em></td></tr>
+        <tr><td><strong>bis</strong></td><td>пока не</td><td><em>Warte <span class="tr">(жди)</span>, bis ich fertig <span class="tr">(готов)</span> bin.</em></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p><strong>wenn</strong> — настоящее + повторяющиеся события &nbsp;·&nbsp; <strong>als</strong> — однократное событие в прошлом</p></div></div>
+  </div>
+</div>
+
+<div class="card" id="s24">
+  <div class="card-header"><span class="badge badge-num">24</span><div class="card-title">Относительные предложения <span class="de">(Relativsätze)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+      <tbody>
+        <tr><td>Nom.</td><td><span class="gm">der</span></td><td><span class="gf">die</span></td><td><span class="gn">das</span></td><td>die</td></tr>
+        <tr><td>Akk.</td><td><span class="gm">den</span></td><td><span class="gf">die</span></td><td><span class="gn">das</span></td><td>die</td></tr>
+        <tr><td>Dat.</td><td><span class="gm">dem</span></td><td><span class="gf">der</span></td><td><span class="gn">dem</span></td><td class="hl">denen</td></tr>
+        <tr><td>Gen.</td><td class="hl">dessen <span class="tr">(чей м/с.р.)</span></td><td class="hl">deren <span class="tr">(чья ж.р.)</span></td><td class="hl">dessen <span class="tr">(чьё)</span></td><td class="hl">deren <span class="tr">(чьи)</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Падеж определяется <strong>ролью в придаточном</strong>, не в главном!</p></div></div>
+    <ul class="rlist">
+      <li><em>der Mann, <strong>der</strong> hier wohnt <span class="tr">(живёт)</span></em> — Nom.</li>
+      <li><em>der Mann, <strong>den</strong> ich kenne <span class="tr">(знаю)</span></em> — Akk.</li>
+      <li><em>der Mann, <strong>dem</strong> ich helfe <span class="tr">(помогаю)</span></em> — Dat.</li>
+      <li><em>der Mann, <strong>dessen</strong> Auto <span class="tr">(машина)</span> rot <span class="tr">(красная)</span> ist</em> — Gen.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" id="s25">
+  <div class="card-header"><span class="badge badge-num">25</span><div class="card-title">Двойные союзы <span class="de">(Zweiteilige Konnektoren)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Союз</th><th>Значение</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>sowohl … als auch</strong></td><td>и … и</td><td><em>sowohl Deutsch <span class="tr">(нем.)</span> als auch Englisch <span class="tr">(англ.)</span></em></td></tr>
+        <tr><td><strong>weder … noch</strong></td><td>ни … ни</td><td><em>weder Kaffee <span class="tr">(кофе)</span> noch Tee <span class="tr">(чай)</span></em></td></tr>
+        <tr><td><strong>entweder … oder</strong></td><td>или … или</td><td><em>Entweder kommst du mit, oder ich gehe allein <span class="tr">(один)</span>.</em></td></tr>
+        <tr><td><strong>nicht nur … sondern auch</strong></td><td>не только … но и</td><td><em>nicht nur klug <span class="tr">(умная)</span>, sondern auch fleißig <span class="tr">(трудолюбивая)</span></em></td></tr>
+        <tr><td><strong>zwar … aber</strong></td><td>конечно … но</td><td><em>zwar kalt <span class="tr">(холодно)</span>, aber schön <span class="tr">(красиво)</span></em></td></tr>
+        <tr><td><strong>je … desto/umso</strong></td><td>чем … тем</td><td><em>Je mehr <span class="tr">(больше)</span> du lernst, desto besser <span class="tr">(лучше)</span>.</em></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>je … desto: после <strong>je</strong> — глагол в конец, после <strong>desto</strong> — сразу глагол: <em>Je mehr er lernt, desto besser <strong>wird</strong> er.</em></p></div></div>
+  </div>
+</div>
+
+
+<div class="card" id="s32">
+  <div class="card-header"><span class="badge badge-num">32</span><div class="card-title">Условные предложения <span class="de">(Konditionalsätze)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Тип</th><th>Структура</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Реальное</strong> <span class="tr">(возможно)</span></td>
+          <td>wenn + Präsens, … Präsens/Futur</td>
+          <td><em><strong>Wenn</strong> es regnet <span class="tr">(идёт дождь)</span>, <strong>bleibe</strong> ich zu Hause <span class="tr">(дома)</span>.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Нереальное</strong> <span class="tr">(сейчас)</span></td>
+          <td>wenn + Konj. II, … würde/Konj. II</td>
+          <td><em><strong>Wenn</strong> ich reich <span class="tr">(богат)</span> <strong>wäre</strong>, <strong>würde</strong> ich reisen <span class="tr">(путешествовать)</span>.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Нереальное</strong> <span class="tr">(прошлое)</span></td>
+          <td>wenn + hätte/wäre + P.II, … hätte/wäre + P.II</td>
+          <td><em><strong>Wenn</strong> ich das <strong>gewusst hätte</strong>, <strong>wäre</strong> ich gekommen.</em></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>Без wenn</strong> — инверсия: <em><strong>Hätte</strong> ich Zeit, <strong>würde</strong> ich kommen.</em> = Если бы у меня было время…</p></div></div>
+    <ul class="rlist">
+      <li><strong>falls</strong> <span class="tr">(в случае если)</span> — синоним wenn: <em>Falls du Fragen <span class="tr">(вопросы)</span> hast, ruf an <span class="tr">(позвони)</span>.</em></li>
+      <li><strong>sofern</strong> <span class="tr">(при условии что)</span> — формальнее: <em>Sofern alles <span class="tr">(всё)</span> klappt <span class="tr">(получится)</span>, fahren wir.</em></li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Прочее</span><div class="level-sep-line"></div></div>
+
+
+<div class="card" id="s26">
+  <div class="card-header">
+    <span class="badge badge-num">26</span>
+    <div class="card-title">Отрицание <span class="de">(Verneinung)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Слово</th><th>Когда</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>nicht</strong> <span class="tr">(не)</span></td>
+          <td>Глагол, прилаг., наречие, конкретное существительное</td>
+          <td><em>Das ist <strong>nicht</strong> gut <span class="tr">(хорошо)</span>.</em></td>
+        </tr>
+        <tr>
+          <td><strong>kein/keine</strong> <span class="tr">(нет/никакой)</span></td>
+          <td>Существительное с неопр. артиклем или без</td>
+          <td><em>Ich habe <strong>kein</strong> Auto <span class="tr">(машины)</span>.</em></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn">
+      <span class="alert-icon">⚠️</span>
+      <div class="alert-body">
+        <p><strong>nicht müssen</strong> = не обязан &nbsp;≠&nbsp; <strong>nicht dürfen</strong> = нельзя (запрет)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="s27">
+  <div class="card-header"><span class="badge badge-num">27</span><div class="card-title">Степени сравнения <span class="de">(Komparativ &amp; Superlativ)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Grundform</th><th>Komparativ</th><th>Superlativ</th></tr></thead>
+      <tbody>
+        <tr><td>schnell <span class="tr">(быстрый)</span></td><td>schnell<strong>er</strong> <span class="tr">(быстрее)</span></td><td>am schnell<strong>sten</strong> <span class="tr">(быстрее всего)</span></td></tr>
+        <tr><td>gut <span class="tr">(хорошо)</span></td><td><span class="hl">besser</span> <span class="tr">(лучше)</span></td><td><span class="hl">am besten</span> <span class="tr">(лучше всего)</span></td></tr>
+        <tr><td>viel <span class="tr">(много)</span></td><td><span class="hl">mehr</span> <span class="tr">(больше)</span></td><td><span class="hl">am meisten</span> <span class="tr">(больше всего)</span></td></tr>
+        <tr><td>gern <span class="tr">(охотно)</span></td><td><span class="hl">lieber</span> <span class="tr">(охотнее)</span></td><td><span class="hl">am liebsten</span> <span class="tr">(охотнее всего)</span></td></tr>
+        <tr><td>hoch <span class="tr">(высокий)</span></td><td><span class="hl">höher</span> <span class="tr">(выше)</span></td><td><span class="hl">am höchsten</span> <span class="tr">(выше всего)</span></td></tr>
+        <tr><td>nah <span class="tr">(близкий)</span></td><td><span class="hl">näher</span> <span class="tr">(ближе)</span></td><td><span class="hl">am nächsten</span> <span class="tr">(ближе всего)</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="rule">Умлаут у односложных: alt <span class="tr">(старый)</span> → älter | jung <span class="tr">(молодой)</span> → jünger | groß <span class="tr">(большой)</span> → größer</p>
+  </div>
+</div>
+
+<div class="card" id="s28">
+  <div class="card-header"><span class="badge badge-num">28</span><div class="card-title">da-/wo-Komposita <span class="de">(Präpositionaladverbien)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p><strong>da-/dar-</strong> = указывает на вещь/идею (не на человека!) &nbsp;·&nbsp; Перед гласным: <strong>dar-/wor-</strong></p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Предлог</th><th>da-форма</th><th>Значение</th><th>wo-форма</th></tr></thead>
+      <tbody>
+        <tr><td>auf <span class="tr">(на)</span></td><td class="vf">darauf</td><td><span class="tr">на этом</span></td><td>worauf? <span class="tr">(на чём?)</span></td></tr>
+        <tr><td>für <span class="tr">(для)</span></td><td class="vf">dafür</td><td><span class="tr">для этого</span></td><td>wofür? <span class="tr">(для чего?)</span></td></tr>
+        <tr><td>mit <span class="tr">(с)</span></td><td class="vf">damit</td><td><span class="tr">с этим</span></td><td>womit? <span class="tr">(с чем?)</span></td></tr>
+        <tr><td>über <span class="tr">(о/над)</span></td><td class="vf">darüber</td><td><span class="tr">об этом</span></td><td>worüber? <span class="tr">(о чём?)</span></td></tr>
+        <tr><td>von <span class="tr">(от)</span></td><td class="vf">davon</td><td><span class="tr">от этого</span></td><td>wovon? <span class="tr">(от чего?)</span></td></tr>
+        <tr><td>zu <span class="tr">(к)</span></td><td class="vf">dazu</td><td><span class="tr">к этому</span></td><td>wozu? <span class="tr">(к чему?)</span></td></tr>
+        <tr><td>in <span class="tr">(в)</span></td><td class="vf">darin</td><td><span class="tr">в этом</span></td><td>worin? <span class="tr">(в чём?)</span></td></tr>
+        <tr><td>an <span class="tr">(у/на)</span></td><td class="vf">daran</td><td><span class="tr">об этом</span></td><td>woran? <span class="tr">(о чём?)</span></td></tr>
+        <tr><td>nach <span class="tr">(после)</span></td><td class="vf">danach</td><td><span class="tr">после этого</span></td><td>wonach? <span class="tr">(после чего?)</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>На человека → предлог + местоимение: <em>Ich warte auf meinen Freund <span class="tr">(друга)</span> → auf <strong>ihn</strong></em> (не darauf!)</p></div></div>
+  </div>
+</div>
+
+<div class="card" id="s33">
+  <div class="card-header"><span class="badge badge-num">33</span><div class="card-title">Причастия как прилагательные <span class="de">(Partizipien I &amp; II)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>Образование</th><th>Значение</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Partizip I</strong></td>
+          <td>Infinitiv + <strong>d</strong></td>
+          <td><span class="tr">действие происходит сейчас (активное)</span></td>
+          <td><em>der <strong>spielend</strong>e Junge</em> <span class="tr">(играющий мальчик)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Partizip II</strong></td>
+          <td>ge- + основа + -t/-en</td>
+          <td><span class="tr">действие завершено (пассивное)</span></td>
+          <td><em>das <strong>geschrieben</strong>e Buch</em> <span class="tr">(написанная книга)</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Как прилагательные, причастия склоняются по тем же правилам: <em>ein schlafend<strong>es</strong> Kind</em> <span class="tr">(спящий ребёнок)</span></p></div></div>
+    <ul class="rlist">
+      <li><em>die <strong>lachend</strong>e Frau</em> <span class="tr">(смеющаяся женщина)</span> — Partizip I</li>
+      <li><em>die <strong>geöffnet</strong>e Tür</em> <span class="tr">(открытая дверь)</span> — Partizip II</li>
+      <li><em>der gut <strong>bezahlt</strong>e Job</em> <span class="tr">(хорошо оплачиваемая работа)</span> — Partizip II</li>
+      <li><em>das <strong>kochend</strong>e Wasser</em> <span class="tr">(кипящая вода)</span> — Partizip I</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" id="s34">
+  <div class="card-header"><span class="badge badge-num">34</span><div class="card-title">Субстантивация <span class="de">(Nominalisierung)</span></div></div>
+  <div class="card-content">
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Из глаголов и прилагательных можно образовать существительные!</p></div></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Источник</th><th>Правило</th><th>Примеры</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Глагол → сущ.</strong></td>
+          <td>Infinitiv с заглавной = <strong>das</strong> (с.р.)</td>
+          <td><em>lesen → <strong>das Lesen</strong></em> <span class="tr">(чтение)</span><br><em>schreiben → <strong>das Schreiben</strong></em> <span class="tr">(письмо/написание)</span><br><em>essen → <strong>das Essen</strong></em> <span class="tr">(еда)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Прилагат. → сущ.</strong></td>
+          <td>С артиклем, склоняется!</td>
+          <td><em><strong>der Alte</strong></em> <span class="tr">(старик)</span>, <em><strong>die Alte</strong></em> <span class="tr">(старуха)</span><br><em><strong>das Schöne</strong></em> <span class="tr">(прекрасное)</span><br><em><strong>der Deutsche</strong></em> <span class="tr">(немец)</span> / <em><strong>ein Deutscher</strong></em></td>
+        </tr>
+        <tr>
+          <td><strong>Суффиксы</strong></td>
+          <td>-ung, -heit, -keit, -tion</td>
+          <td><em>entscheiden → die Entscheid<strong>ung</strong></em> <span class="tr">(решение)</span><br><em>frei → die Frei<strong>heit</strong></em> <span class="tr">(свобода)</span><br><em>möglich → die Möglich<strong>keit</strong></em> <span class="tr">(возможность)</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body"><p>Субстантивированное прилагательное склоняется как прилагательное: <em>ein Deutsch<strong>er</strong></em> (Nom.), <em>einen Deutsch<strong>en</strong></em> (Akk.)</p></div></div>
+  </div>
+</div>
+
+<div class="card" id="s35">
+  <div class="card-header"><span class="badge badge-num">35</span><div class="card-title">Порядковые числительные <span class="de">(Ordinalzahlen)</span></div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Правило</th><th>Числа</th><th>Примеры</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1–19: число + <strong>-te</strong></td>
+          <td>vierte <span class="tr">(4-й)</span>, fünfte <span class="tr">(5-й)</span>, …</td>
+          <td><em>der <strong>vierte</strong> Stock <span class="tr">(этаж)</span></em></td>
+        </tr>
+        <tr>
+          <td>20+: число + <strong>-ste</strong></td>
+          <td>zwanzigste <span class="tr">(20-й)</span>, …</td>
+          <td><em>am <strong>zwanzigsten</strong> März <span class="tr">(марта)</span></em></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div class="alert-body">
+      <p>Исключения:</p>
+      <ul>
+        <li><strong>erst</strong>e <span class="tr">(1-й)</span> — не «einste»</li>
+        <li><strong>dritt</strong>e <span class="tr">(3-й)</span> — не «dreite»</li>
+        <li><strong>siebt</strong>e <span class="tr">(7-й)</span> — не «siebente»</li>
+        <li><strong>acht</strong>e <span class="tr">(8-й)</span> — не «achtte»</li>
+      </ul>
+    </div></div>
+    <div class="alert alert-info"><span class="alert-icon">💡</span><div class="alert-body"><p>Склоняются как прилагательные: <em>am erst<strong>en</strong> Januar</em> <span class="tr">(1 января)</span> &nbsp;·&nbsp; Даты: <em>Heute ist der fünf<strong>te</strong> März.</em> <span class="tr">(5 марта)</span></p></div></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ QUICK REFERENCE ═══════════════ -->
+<div class="level-sep"><div class="level-sep-line"></div><span class="level-sep-label">Справочник</span><div class="level-sep-line"></div></div>
+
+<div class="card" id="quick">
+  <div class="card-header"><div class="card-title">Предлоги по падежам</div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Akkusativ</th><th>Dativ</th><th>Genitiv</th><th>Wechsel (Dat./Akk.)</th></tr></thead>
+      <tbody><tr>
+        <td>durch <span class="tr">(сквозь)</span><br>für <span class="tr">(для)</span><br>gegen <span class="tr">(против)</span><br>ohne <span class="tr">(без)</span><br>um <span class="tr">(вокруг)</span><br>bis <span class="tr">(до)</span><br>entlang <span class="tr">(вдоль)</span></td>
+        <td>aus <span class="tr">(из)</span><br>bei <span class="tr">(у)</span><br>mit <span class="tr">(с)</span><br>nach <span class="tr">(после/в)</span><br>seit <span class="tr">(с/уже)</span><br>von <span class="tr">(от)</span><br>zu <span class="tr">(к)</span><br>gegenüber <span class="tr">(напротив)</span><br>außer <span class="tr">(кроме)</span></td>
+        <td>wegen <span class="tr">(из-за)</span><br>trotz <span class="tr">(несмотря)</span><br>während <span class="tr">(во время)</span><br>statt <span class="tr">(вместо)</span><br>aufgrund <span class="tr">(на основании)</span><br>innerhalb <span class="tr">(внутри)</span><br>außerhalb <span class="tr">(вне)</span><br>mithilfe <span class="tr">(с помощью)</span></td>
+        <td>an <span class="tr">(у/на)</span><br>auf <span class="tr">(на)</span><br>hinter <span class="tr">(за)</span><br>in <span class="tr">(в)</span><br>neben <span class="tr">(рядом)</span><br>über <span class="tr">(над/о)</span><br>unter <span class="tr">(под)</span><br>vor <span class="tr">(перед)</span><br>zwischen <span class="tr">(между)</span></td>
+      </tr></tbody>
+    </table></div>
+  </div>
+</div>
+
+<div class="card" id="quick2">
+  <div class="card-header"><div class="card-title">Союзы: Hauptsatz vs. Nebensatz</div></div>
+  <div class="card-content">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Hauptsatz <span style="font-weight:400;font-size:11px;color:var(--muted-fg)">(глагол на 2-м месте)</span></th><th>Nebensatz <span style="font-weight:400;font-size:11px;color:var(--muted-fg)">(глагол в конец)</span></th></tr></thead>
+      <tbody><tr>
+        <td>
+          und <span class="tr">(и)</span>, aber <span class="tr">(но)</span>, oder <span class="tr">(или)</span>, denn <span class="tr">(ведь)</span>, sondern <span class="tr">(а/но)</span><br><br>
+          <em>Инверсия после (наречия-связки):</em><br>
+          deshalb <span class="tr">(поэтому)</span>, deswegen <span class="tr">(из-за этого)</span>, daher <span class="tr">(поэтому, формальн.)</span><br>
+          trotzdem <span class="tr">(тем не менее)</span>, allerdings <span class="tr">(однако)</span>, jedoch <span class="tr">(однако, формальн.)</span><br>
+          dann <span class="tr">(потом)</span>, danach <span class="tr">(после этого)</span>, schließlich <span class="tr">(в итоге)</span><br>
+          also <span class="tr">(итак)</span>, folglich <span class="tr">(следовательно)</span><br>
+          außerdem <span class="tr">(кроме того)</span>, stattdessen <span class="tr">(вместо этого)</span><br>
+          inzwischen <span class="tr">(тем временем)</span>, einerseits…andererseits <span class="tr">(с одной/другой стороны)</span>
+        </td>
+        <td>
+          dass <span class="tr">(что)</span>, weil <span class="tr">(потому что)</span>, obwohl <span class="tr">(хотя)</span><br>
+          wenn <span class="tr">(если/когда)</span>, als <span class="tr">(когда-однокр.)</span>, ob <span class="tr">(ли)</span><br>
+          damit <span class="tr">(чтобы)</span>, bevor <span class="tr">(прежде чем)</span><br>
+          nachdem <span class="tr">(после того как)</span>, während <span class="tr">(пока)</span><br>
+          seit(dem) <span class="tr">(с тех пор как)</span>, bis <span class="tr">(пока не)</span><br>
+          falls <span class="tr">(в случае если)</span>, sofern <span class="tr">(при условии)</span><br>
+          solange <span class="tr">(пока)</span>, so dass <span class="tr">(так что)</span><br>
+          indem <span class="tr">(тем, что)</span>, ohne dass <span class="tr">(без того чтобы)</span>
+        </td>
+      </tr></tbody>
+    </table></div>
+  </div>
+</div>
+
+<div id="search-noresult">Ничего не найдено 🔍</div>
+<footer>35 тем · Goethe / TELC B1 · Viel Erfolg! 🇩🇪</footer>
+</main>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  // ── Dark theme toggle ──
+  function toggleDark() {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', 'dark');
+    }
+    const nowDark = !isDark;
+    _syncDarkBtn(nowDark);
+    localStorage.setItem('de_dark', nowDark ? '1' : '0');
+  }
+  function _syncDarkBtn(isDark) {
+    const btn  = document.getElementById('darkBtn');
+    const btnM = document.getElementById('darkBtnM');
+    if (btn) btn.innerHTML = isDark ? '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"5\"/><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"22\"/><line x1=\"4.93\" y1=\"4.93\" x2=\"7.05\" y2=\"7.05\"/><line x1=\"16.95\" y1=\"16.95\" x2=\"19.07\" y2=\"19.07\"/><line x1=\"2\" y1=\"12\" x2=\"5\" y2=\"12\"/><line x1=\"19\" y1=\"12\" x2=\"22\" y2=\"12\"/><line x1=\"4.93\" y1=\"19.07\" x2=\"7.05\" y2=\"16.95\"/><line x1=\"16.95\" y1=\"7.05\" x2=\"19.07\" y2=\"4.93\"/></svg>' : '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg>';
+    if (btnM) {
+      btnM.classList.toggle('m-active', isDark);
+      btnM.innerHTML = isDark ? '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"5\"/><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"22\"/><line x1=\"4.93\" y1=\"4.93\" x2=\"7.05\" y2=\"7.05\"/><line x1=\"16.95\" y1=\"16.95\" x2=\"19.07\" y2=\"19.07\"/><line x1=\"2\" y1=\"12\" x2=\"5\" y2=\"12\"/><line x1=\"19\" y1=\"12\" x2=\"22\" y2=\"12\"/><line x1=\"4.93\" y1=\"19.07\" x2=\"7.05\" y2=\"16.95\"/><line x1=\"16.95\" y1=\"7.05\" x2=\"19.07\" y2=\"4.93\"/></svg>' : '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg>';
+    }
+  }
+
+  // ── Compact toggle ──
+  function toggleCompact() {
+    const btnM = document.getElementById('compactBtnM');
+    const on = document.body.classList.toggle('compact');
+    const btn = document.getElementById('compactBtn');
+    if (btn) btn.classList.toggle('active-icon', on);
+    // sync mobile button
+    if (btnM) btnM.classList.toggle('m-active', on);
+    localStorage.setItem('de_compact', on ? '1' : '0');
+  }
+
+  // ── Global tooltip: hover (desktop) + tap (mobile), position:fixed avoids overflow clipping ──
+  (function() {
+    var gTip = document.createElement('div');
+    gTip.id = 'global-tip';
+    document.body.appendChild(gTip);
+    var pinned = null;
+
+    function isTipTarget(el) {
+      return el && (el.classList.contains('prep-tip') || el.classList.contains('tr-anchor'));
+    }
+    function tipText(el) {
+      return el.getAttribute('data-tip') || '';
+    }
+    function place(el) {
+      var r  = el.getBoundingClientRect();
+      var tw = gTip.offsetWidth  || 120;
+      var th = gTip.offsetHeight || 28;
+      var x  = r.left + r.width / 2 - tw / 2;
+      var y  = r.top - th - 8;
+      x = Math.max(6, Math.min(x, window.innerWidth - tw - 6));
+      if (y < 6) y = r.bottom + 8;
+      gTip.style.left = x + 'px';
+      gTip.style.top  = y + 'px';
+    }
+    function show(el) {
+      gTip.textContent = tipText(el);
+      gTip.classList.add('tip-visible');
+      requestAnimationFrame(function() { place(el); });
+    }
+    function hide() { gTip.classList.remove('tip-visible'); }
+
+    document.addEventListener('mouseover', function(e) {
+      var el = e.target.closest('.prep-tip, .tr-anchor');
+      if (el && isTipTarget(el) && el !== pinned) show(el);
+    });
+    document.addEventListener('mouseout', function(e) {
+      var el = e.target.closest('.prep-tip, .tr-anchor');
+      if (el && isTipTarget(el) && el !== pinned) hide();
+    });
+    document.addEventListener('click', function(e) {
+      var el = e.target.closest('.prep-tip, .tr-anchor');
+      if (el && isTipTarget(el)) {
+        if (pinned === el) { pinned = null; hide(); }
+        else               { pinned = el;   show(el); }
+        e.stopPropagation();
+      } else { pinned = null; hide(); }
+    });
+  })();
+
+  // ── tr-anchor helpers: wrap/unwrap the word preceding each .tr span ──
+  function attachTrAnchors(main) {
+    main.querySelectorAll('.tr').forEach(function(trSpan) {
+      var tip  = trSpan.textContent.trim();
+      var prev = trSpan.previousSibling;
+      if (!prev) return;
+
+      var anchor;
+      if (prev.nodeType === Node.ELEMENT_NODE) {
+        // Preceding element (<strong>, <em>, …) becomes the anchor directly
+        anchor = prev;
+        anchor.classList.add('tr-anchor');
+        anchor.setAttribute('data-tip', tip);
+        trSpan._trAnchorType = 'elem';
+
+      } else if (prev.nodeType === Node.TEXT_NODE) {
+        var full = prev.textContent;
+        // Extract last word: trimEnd first so trailing whitespace doesn't confuse the match
+        var trimmed = full.trimEnd();
+        var trailWs = full.slice(trimmed.length);
+        var lastWordMatch = trimmed.match(/(\S+)$/);
+        if (!lastWordMatch) return;
+        var word = lastWordMatch[1];
+        var beforeWord = trimmed.slice(0, trimmed.length - word.length);
+
+        prev.textContent = beforeWord;          // shorten the text node
+
+        anchor = document.createElement('span');
+        anchor.className = 'tr-anchor';
+        anchor.setAttribute('data-tip', tip);
+        anchor.textContent = word;
+        trSpan.parentNode.insertBefore(anchor, trSpan);
+        if (trailWs) {
+          trSpan.parentNode.insertBefore(document.createTextNode(trailWs), trSpan);
+        }
+        trSpan._trAnchorType = 'text';
+      }
+      if (anchor) trSpan._trAnchor = anchor;
+    });
+  }
+
+  function detachTrAnchors(main) {
+    main.querySelectorAll('.tr').forEach(function(trSpan) {
+      var anchor = trSpan._trAnchor;
+      if (!anchor) return;
+      var type = trSpan._trAnchorType;
+
+      if (type === 'elem') {
+        anchor.classList.remove('tr-anchor');
+        anchor.removeAttribute('data-tip');
+
+      } else if (type === 'text') {
+        var word = anchor.textContent;
+        // Collect any trailing-whitespace text node between anchor and .tr
+        var next = anchor.nextSibling;
+        var trailWs = '';
+        if (next && next !== trSpan && next.nodeType === Node.TEXT_NODE) {
+          trailWs = next.textContent;
+          next.remove();
+        }
+        // Merge back into the preceding text node (or create one)
+        var textBefore = anchor.previousSibling;
+        if (textBefore && textBefore.nodeType === Node.TEXT_NODE) {
+          textBefore.textContent += word + trailWs;
+        } else {
+          anchor.parentNode.insertBefore(document.createTextNode(word + trailWs), anchor);
+        }
+        anchor.remove();
+      }
+
+      delete trSpan._trAnchor;
+      delete trSpan._trAnchorType;
+    });
+  }
+
+  // ── Restore state on load ──
+  (function() {
+    if (localStorage.getItem('de_dark') === '1') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    // Compact: if never set, default to compact on mobile, normal on desktop
+    var savedCompact = localStorage.getItem('de_compact');
+    var isMobile = window.matchMedia('(max-width: 700px)').matches;
+    var wantsCompact = savedCompact !== null ? savedCompact === '1' : isMobile;
+    if (wantsCompact) {
+      document.body.classList.add('compact');
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('compactBtn');
+        if (btn) btn.classList.add('active-icon');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      var main = document.querySelector('main');
+
+      // Translations: hidden by default; show only if user explicitly toggled on
+      var savedTr = localStorage.getItem('de_tr');
+      var wantsTrHidden = savedTr !== '1'; // null (first visit) or '0' → hide
+      if (wantsTrHidden && main) {
+        main.classList.add('hide-tr');
+        attachTrAnchors(main);
+        var trBtn = document.getElementById('trBtn');
+        if (trBtn) trBtn.classList.add('active-icon');
+        var trBtnM = document.getElementById('trBtnM');
+        if (trBtnM) {
+          trBtnM.classList.add('m-active');
+          trBtnM.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+        }
+      }
+
+      // Sync other mobile buttons
+      var compactBtnM = document.getElementById('compactBtnM');
+      if (compactBtnM && document.body.classList.contains('compact')) {
+        compactBtnM.classList.add('m-active');
+      }
+      var darkBtnM = document.getElementById('darkBtnM');
+      if (darkBtnM) _syncDarkBtn(document.documentElement.getAttribute('data-theme') === 'dark');
+    });
+  })();
+
+  function toggleNav() {
+    const aside = document.getElementById('sidebar');
+    const overlay = document.getElementById('navOverlay');
+    aside.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  // Close sidebar when nav link clicked (mobile)
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('aside a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        const aside = document.getElementById('sidebar');
+        const overlay = document.getElementById('navOverlay');
+        if (aside.classList.contains('open')) {
+          aside.classList.remove('open');
+          overlay.classList.remove('open');
+        }
+      });
+    });
+  });
+
+  function toggleTr() {
+    const main = document.querySelector('main');
+    const btn  = document.getElementById('trBtn');
+    const btnM = document.getElementById('trBtnM');
+    const isHidden = main.classList.toggle('hide-tr');
+    // Wrap / unwrap preceding words as hoverable anchors
+    if (isHidden) { attachTrAnchors(main); }
+    else          { detachTrAnchors(main); }
+    localStorage.setItem('de_tr', isHidden ? '0' : '1');
+    btn.classList.toggle('active-icon', isHidden);
+    if (btnM) {
+      btnM.classList.toggle('m-active', isHidden);
+      btnM.innerHTML = isHidden
+        ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+        : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
+    }
+  }
+
+  // ── Progress bar + Back to top ──
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (scrolled / total * 100) : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('back-top').classList.toggle('show', scrolled > 500);
+  }, { passive: true });
+
+  // ── Search ──
+  function doSearch(q) {
+    q = q.trim().toLowerCase();
+    const main = document.querySelector('main');
+    const cards = main.querySelectorAll('.card, .card-2col');
+    const seps  = main.querySelectorAll('.level-sep');
+    let any = false;
+    cards.forEach(function(card) {
+      if (!q) { card.classList.remove('search-hide','search-match'); return; }
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) { card.classList.remove('search-hide'); card.classList.add('search-match'); any = true; }
+      else { card.classList.add('search-hide'); card.classList.remove('search-match'); }
+    });
+    // hide separators that have no visible cards between them
+    if (q) {
+      seps.forEach(function(sep) {
+        let next = sep.nextElementSibling;
+        let hasVisible = false;
+        while (next && !next.classList.contains('level-sep')) {
+          if (next.classList.contains('card') || next.classList.contains('card-2col')) {
+            if (!next.classList.contains('search-hide')) { hasVisible = true; break; }
+          }
+          next = next.nextElementSibling;
+        }
+        sep.classList.toggle('search-hide', !hasVisible);
+      });
+    } else {
+      seps.forEach(function(sep) { sep.classList.remove('search-hide'); });
+    }
+    const noRes = document.getElementById('search-noresult');
+    if (noRes) noRes.style.display = (q && !any) ? 'block' : 'none';
+  }
+
+  // ── Tabs ──
+  function switchTab(btn, panelId) {
+    const bar = btn.closest('.tab-bar');
+    bar.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('tab-active'); });
+    btn.classList.add('tab-active');
+    const container = bar.parentElement;
+    container.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('tab-active'); });
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('tab-active');
+  }
+</script>
+</body>
+</html>

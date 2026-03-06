@@ -107,7 +107,7 @@ body {
 }
 
 /* ── Layout ── */
-.layout { display: flex; min-height: 100vh; }
+.layout { display: flex; min-height: 100vh; max-width: 1100px; margin: 0 auto; width: 100%; }
 
 /* ── Sidebar ── */
 aside {
@@ -123,6 +123,16 @@ aside {
   font-size: 12.5px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
+  transition: width .25s cubic-bezier(.4,0,.2,1), min-width .25s cubic-bezier(.4,0,.2,1), padding .25s, border-width .25s;
+}
+/* Desktop sidebar collapsed state */
+body.sidebar-hidden aside {
+  width: 0;
+  min-width: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-right-width: 0;
+  overflow: hidden;
 }
 aside h2 {
   padding: 0 16px 8px;
@@ -508,7 +518,7 @@ footer {
   margin-top: 32px;
 }
 
-/* ── Sidebar header (close btn) ── */
+/* ── Sidebar header ── */
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -517,16 +527,66 @@ footer {
   margin-bottom: 4px;
 }
 .sidebar-header h2 { padding: 0; }
-.close-nav {
-  display: none;
+.sidebar-close-btn {
   border: none;
   background: transparent;
   cursor: pointer;
   padding: 4px;
   color: var(--muted-fg);
   border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
 }
-.close-nav:hover { background: var(--accent); color: var(--foreground); }
+.sidebar-close-btn:hover { background: var(--accent); color: var(--foreground); }
+
+/* ── Sidebar controls (bottom) ── */
+.sidebar-controls {
+  position: sticky;
+  bottom: 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 8px 12px;
+  display: flex;
+  gap: 4px;
+  margin-top: 12px;
+}
+[data-theme="dark"] .sidebar-controls { background: oklch(0.17 0.005 285.823); }
+.sc-btn {
+  flex: 1;
+  height: 30px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted-fg);
+  transition: background .15s, color .15s;
+  font-family: inherit;
+}
+.sc-btn:hover { background: var(--accent); color: var(--foreground); }
+.sc-btn.sc-active { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+
+/* ── Floating sidebar-open button (desktop, when sidebar hidden) ── */
+.sidebar-open-btn {
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  z-index: 50;
+  width: 18px; height: 48px;
+  border: 1px solid var(--border);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  background: var(--background);
+  cursor: pointer;
+  align-items: center; justify-content: center;
+  color: var(--muted-fg);
+  transition: background .15s, color .15s;
+  box-shadow: 2px 0 8px rgb(0 0 0 / .07);
+}
+.sidebar-open-btn:hover { background: var(--accent); color: var(--foreground); }
+body.sidebar-hidden .sidebar-open-btn { display: flex; }
+@media (max-width: 680px) { .sidebar-open-btn { display: none !important; } }
 
 /* ── Hamburger (mobile only) ── */
 .hamburger { display: none !important; }
@@ -922,15 +982,6 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="search" class="search-input" placeholder="Поиск…" oninput="doSearch(this.value)" style="font-size:12px">
   </div>
-  <div class="mhdr-actions">
-    <button class="mhdr-btn" id="darkBtnM" onclick="toggleDark()" aria-label="Тема" title="Тёмная тема"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
-    <button class="mhdr-btn" id="trBtnM" onclick="toggleTr()" aria-label="Переводы" title="Переводы">
-      <svg id="trIconM" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button>
-    <button class="mhdr-btn" id="compactBtnM" onclick="toggleCompact()" aria-label="Компакт" title="Компакт">
-      <svg id="compactIconM" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg>
-    </button>
-  </div>
 </header>
 
 <div class="layout">
@@ -939,7 +990,7 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
 <aside id="sidebar">
   <div class="sidebar-header">
     <h2>Содержание</h2>
-    <button class="close-nav" onclick="toggleNav()" aria-label="Закрыть">
+    <button class="sidebar-close-btn" id="sidebarToggleBtn" onclick="handleSidebarClose()" title="Скрыть меню" aria-label="Скрыть меню">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
@@ -1000,7 +1051,13 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     <li><a href="#quick2">Союзы</a></li>
   </ul></details></li>
 </ul>
+  <div class="sidebar-controls">
+    <button class="sc-btn" id="darkBtn" onclick="toggleDark()" title="Тёмная / светлая тема"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    <button class="sc-btn" id="trBtn" onclick="toggleTr()" title="Скрыть / показать переводы"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    <button class="sc-btn" id="compactBtn" onclick="toggleCompact()" title="Компактный режим"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg></button>
+  </div>
 </aside>
+<button class="sidebar-open-btn" onclick="toggleSidebar()" title="Открыть меню" aria-label="Открыть меню"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 <div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
 
 <!-- ═══ MAIN ═══ -->
@@ -1013,10 +1070,6 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="search" class="search-input" placeholder="Поиск по теме…" oninput="doSearch(this.value)">
   </div>
-  <button class="btn btn-outline hamburger" id="hamburgerBtn" onclick="toggleNav()" aria-label="Меню"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-  <button class="btn btn-outline btn-icon" id="darkBtn" onclick="toggleDark()" title="Тёмная / светлая тема" aria-label="Тема"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
-  <button class="btn btn-outline btn-icon" id="compactBtn" onclick="toggleCompact()" title="Компактный режим"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg></button>
-  <button class="btn btn-outline btn-icon" id="trBtn" onclick="toggleTr()" title="Скрыть / показать переводы" aria-label="Переводы"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
 </header>
 
 
@@ -2291,31 +2344,27 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     const isDark = root.getAttribute('data-theme') === 'dark';
     if (isDark) {
       root.removeAttribute('data-theme');
+      localStorage.setItem('de_dark', '0');
     } else {
       root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('de_dark', '1');
     }
-    const nowDark = !isDark;
-    _syncDarkBtn(nowDark);
-    localStorage.setItem('de_dark', nowDark ? '1' : '0');
+    _syncDarkBtn(!isDark);
   }
   function _syncDarkBtn(isDark) {
-    const btn  = document.getElementById('darkBtn');
-    const btnM = document.getElementById('darkBtnM');
-    if (btn) btn.innerHTML = isDark ? '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"5\"/><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"22\"/><line x1=\"4.93\" y1=\"4.93\" x2=\"7.05\" y2=\"7.05\"/><line x1=\"16.95\" y1=\"16.95\" x2=\"19.07\" y2=\"19.07\"/><line x1=\"2\" y1=\"12\" x2=\"5\" y2=\"12\"/><line x1=\"19\" y1=\"12\" x2=\"22\" y2=\"12\"/><line x1=\"4.93\" y1=\"19.07\" x2=\"7.05\" y2=\"16.95\"/><line x1=\"16.95\" y1=\"7.05\" x2=\"19.07\" y2=\"4.93\"/></svg>' : '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg>';
-    if (btnM) {
-      btnM.classList.toggle('m-active', isDark);
-      btnM.innerHTML = isDark ? '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"5\"/><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"22\"/><line x1=\"4.93\" y1=\"4.93\" x2=\"7.05\" y2=\"7.05\"/><line x1=\"16.95\" y1=\"16.95\" x2=\"19.07\" y2=\"19.07\"/><line x1=\"2\" y1=\"12\" x2=\"5\" y2=\"12\"/><line x1=\"19\" y1=\"12\" x2=\"22\" y2=\"12\"/><line x1=\"4.93\" y1=\"19.07\" x2=\"7.05\" y2=\"16.95\"/><line x1=\"16.95\" y1=\"7.05\" x2=\"19.07\" y2=\"4.93\"/></svg>' : '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg>';
-    }
+    const btn = document.getElementById('darkBtn');
+    if (!btn) return;
+    btn.classList.toggle('sc-active', isDark);
+    btn.innerHTML = isDark
+      ? '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   }
 
   // ── Compact toggle ──
   function toggleCompact() {
-    const btnM = document.getElementById('compactBtnM');
     const on = document.body.classList.toggle('compact');
     const btn = document.getElementById('compactBtn');
-    if (btn) btn.classList.toggle('active-icon', on);
-    // sync mobile button
-    if (btnM) btnM.classList.toggle('m-active', on);
+    if (btn) btn.classList.toggle('sc-active', on);
     localStorage.setItem('de_compact', on ? '1' : '0');
   }
 
@@ -2445,45 +2494,48 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
 
   // ── Restore state on load ──
   (function() {
-    if (localStorage.getItem('de_dark') === '1') {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    // Dark: follow system preference; localStorage overrides
+    var _mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var savedDark = localStorage.getItem('de_dark');
+    var isDark = savedDark !== null ? savedDark === '1' : _mq.matches;
+    if (isDark) document.documentElement.setAttribute('data-theme', 'dark');
+    // Auto-update when system preference changes (unless user manually overrode)
+    _mq.addEventListener('change', function(e) {
+      if (localStorage.getItem('de_dark') === null) {
+        if (e.matches) document.documentElement.setAttribute('data-theme', 'dark');
+        else document.documentElement.removeAttribute('data-theme');
+        document.addEventListener('DOMContentLoaded', function() { _syncDarkBtn(e.matches); });
+      }
+    });
+
+    if (localStorage.getItem('de_sidebar') === '0') {
+      document.body.classList.add('sidebar-hidden');
     }
     // Compact: if never set, default to compact on mobile, normal on desktop
     var savedCompact = localStorage.getItem('de_compact');
     var isMobile = window.matchMedia('(max-width: 700px)').matches;
     var wantsCompact = savedCompact !== null ? savedCompact === '1' : isMobile;
-    if (wantsCompact) {
-      document.body.classList.add('compact');
-      document.addEventListener('DOMContentLoaded', function() {
-        var btn = document.getElementById('compactBtn');
-        if (btn) btn.classList.add('active-icon');
-      });
-    }
+    if (wantsCompact) document.body.classList.add('compact');
+
     document.addEventListener('DOMContentLoaded', function() {
       var main = document.querySelector('main');
 
-      // Translations: hidden by default; show only if user explicitly toggled on
+      // Sync dark button
+      _syncDarkBtn(document.documentElement.getAttribute('data-theme') === 'dark');
+
+      // Compact button
+      var compactBtn = document.getElementById('compactBtn');
+      if (compactBtn && document.body.classList.contains('compact')) compactBtn.classList.add('sc-active');
+
+      // Translations: hidden by default
       var savedTr = localStorage.getItem('de_tr');
-      var wantsTrHidden = savedTr !== '1'; // null (first visit) or '0' → hide
+      var wantsTrHidden = savedTr !== '1';
       if (wantsTrHidden && main) {
         main.classList.add('hide-tr');
         attachTrAnchors(main);
         var trBtn = document.getElementById('trBtn');
-        if (trBtn) trBtn.classList.add('active-icon');
-        var trBtnM = document.getElementById('trBtnM');
-        if (trBtnM) {
-          trBtnM.classList.add('m-active');
-          trBtnM.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
-        }
+        if (trBtn) trBtn.classList.add('sc-active');
       }
-
-      // Sync other mobile buttons
-      var compactBtnM = document.getElementById('compactBtnM');
-      if (compactBtnM && document.body.classList.contains('compact')) {
-        compactBtnM.classList.add('m-active');
-      }
-      var darkBtnM = document.getElementById('darkBtnM');
-      if (darkBtnM) _syncDarkBtn(document.documentElement.getAttribute('data-theme') === 'dark');
     });
   })();
 
@@ -2492,6 +2544,14 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     const overlay = document.getElementById('navOverlay');
     aside.classList.toggle('open');
     overlay.classList.toggle('open');
+  }
+  function toggleSidebar() {
+    document.body.classList.toggle('sidebar-hidden');
+    localStorage.setItem('de_sidebar', document.body.classList.contains('sidebar-hidden') ? '0' : '1');
+  }
+  function handleSidebarClose() {
+    if (window.matchMedia('(max-width: 680px)').matches) { toggleNav(); }
+    else { toggleSidebar(); }
   }
   // Close sidebar when nav link clicked (mobile)
   document.addEventListener('DOMContentLoaded', function() {
@@ -2510,19 +2570,11 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
   function toggleTr() {
     const main = document.querySelector('main');
     const btn  = document.getElementById('trBtn');
-    const btnM = document.getElementById('trBtnM');
     const isHidden = main.classList.toggle('hide-tr');
-    // Wrap / unwrap preceding words as hoverable anchors
     if (isHidden) { attachTrAnchors(main); }
     else          { detachTrAnchors(main); }
     localStorage.setItem('de_tr', isHidden ? '0' : '1');
-    btn.classList.toggle('active-icon', isHidden);
-    if (btnM) {
-      btnM.classList.toggle('m-active', isHidden);
-      btnM.innerHTML = isHidden
-        ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
-        : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
-    }
+    if (btn) btn.classList.toggle('sc-active', isHidden);
   }
 
   // ── Progress bar + Back to top ──

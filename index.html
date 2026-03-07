@@ -512,6 +512,9 @@ hr.sep { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
 
 /* ── Emphasis colors ── */
 .hl { color: oklch(0.53 0.2 27); font-weight: 700; }
+/* ── Changing case ending highlight ── */
+.end-hl { color: oklch(0.48 0.18 145); font-weight: 700; }
+[data-theme="dark"] .end-hl { color: oklch(0.78 0.20 145); }
 .vf { color: oklch(0.36 0.12 250); font-weight: 600; }
 /* ── Gender colors ── */
 .gm { color: oklch(0.42 0.14 250); font-weight: inherit; }   /* masculine – blue */
@@ -1158,18 +1161,76 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
 <div class="card" id="s3">
   <div class="card-header"><span class="badge badge-num">3</span><div class="card-title">Притяжательные местоимения <span class="de">(Possessivpronomen)</span></div></div>
   <div class="card-content">
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Лицо</th><th class="gm">м.р. (Nom.)</th><th class="gf">ж.р. (Nom.)</th><th class="gn">с.р. (Nom.)</th><th>мн.ч. (Nom.)</th></tr></thead>
-      <tbody>
-        <tr><td>ich <span class="tr">(я)</span></td><td><strong>mein</strong> <span class="tr">(мой)</span></td><td>meine <span class="tr">(моя)</span></td><td>mein <span class="tr">(моё)</span></td><td>meine <span class="tr">(мои)</span></td></tr>
-        <tr><td>du <span class="tr">(ты)</span></td><td><strong>dein</strong> <span class="tr">(твой)</span></td><td>deine <span class="tr">(твоя)</span></td><td>dein <span class="tr">(твоё)</span></td><td>deine <span class="tr">(твои)</span></td></tr>
-        <tr><td>er/es <span class="tr">(он/оно)</span></td><td><strong>sein</strong> <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td><td>sein <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td></tr>
-        <tr><td>sie <span class="tr">(она)</span></td><td><strong>ihr</strong> <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td><td>ihr <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td></tr>
-        <tr><td>wir <span class="tr">(мы)</span></td><td><strong>unser</strong> <span class="tr">(наш)</span></td><td>unsere <span class="tr">(наша)</span></td><td>unser <span class="tr">(наше)</span></td><td>unsere <span class="tr">(наши)</span></td></tr>
-        <tr><td>ihr <span class="tr">(вы)</span></td><td><strong>euer</strong> <span class="tr">(ваш)</span></td><td>eu<strong>e</strong>re <span class="tr">(ваша)</span></td><td>euer <span class="tr">(ваше)</span></td><td>eu<strong>e</strong>re <span class="tr">(ваши)</span></td></tr>
-        <tr><td>sie/Sie <span class="tr">(они/Вы)</span></td><td><strong>ihr/Ihr</strong> <span class="tr">(их/Ваш)</span></td><td>ihre/Ihre <span class="tr">(их/Ваша)</span></td><td>ihr/Ihr <span class="tr">(их/Ваше)</span></td><td>ihre/Ihre <span class="tr">(их/Ваши)</span></td></tr>
-      </tbody>
-    </table></div>
+    <div class="tab-bar">
+      <button class="tab-btn tab-active" onclick="switchTab(this,'poss-nom')">Nominativ</button>
+      <button class="tab-btn" onclick="switchTab(this,'poss-akk')">Akkusativ</button>
+      <button class="tab-btn" onclick="switchTab(this,'poss-dat')">Dativ</button>
+      <button class="tab-btn" onclick="switchTab(this,'poss-gen')">Genitiv</button>
+    </div>
+
+    <!-- Nominativ (base) -->
+    <div id="poss-nom" class="tab-panel tab-active">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Лицо</th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>ich <span class="tr">(я)</span></td><td>mein <span class="tr">(мой)</span></td><td>meine <span class="tr">(моя)</span></td><td>mein <span class="tr">(моё)</span></td><td>meine <span class="tr">(мои)</span></td></tr>
+          <tr><td>du <span class="tr">(ты)</span></td><td>dein <span class="tr">(твой)</span></td><td>deine <span class="tr">(твоя)</span></td><td>dein <span class="tr">(твоё)</span></td><td>deine <span class="tr">(твои)</span></td></tr>
+          <tr><td>er/es <span class="tr">(он/оно)</span></td><td>sein <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td><td>sein <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td></tr>
+          <tr><td>sie <span class="tr">(она)</span></td><td>ihr <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td><td>ihr <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td></tr>
+          <tr><td>wir <span class="tr">(мы)</span></td><td>unser <span class="tr">(наш)</span></td><td>unsere <span class="tr">(наша)</span></td><td>unser <span class="tr">(наше)</span></td><td>unsere <span class="tr">(наши)</span></td></tr>
+          <tr><td>ihr <span class="tr">(вы)</span></td><td>euer <span class="tr">(ваш)</span></td><td>eure <span class="tr">(ваша)</span></td><td>euer <span class="tr">(ваше)</span></td><td>eure <span class="tr">(ваши)</span></td></tr>
+          <tr><td>sie/Sie <span class="tr">(они/Вы)</span></td><td>ihr/Ihr <span class="tr">(их/Ваш)</span></td><td>ihre/Ihre <span class="tr">(их/Ваша)</span></td><td>ihr/Ihr <span class="tr">(их/Ваше)</span></td><td>ihre/Ihre <span class="tr">(их/Ваши)</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- Akkusativ (only м.р. changes: +en) -->
+    <div id="poss-akk" class="tab-panel">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Лицо</th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>ich <span class="tr">(я)</span></td><td><span class="tr-anchor" data-tip="(мой)">mein<span class="end-hl">en</span></span> <span class="tr">(мой)</span></td><td>meine <span class="tr">(моя)</span></td><td>mein <span class="tr">(моё)</span></td><td>meine <span class="tr">(мои)</span></td></tr>
+          <tr><td>du <span class="tr">(ты)</span></td><td><span class="tr-anchor" data-tip="(твой)">dein<span class="end-hl">en</span></span> <span class="tr">(твой)</span></td><td>deine <span class="tr">(твоя)</span></td><td>dein <span class="tr">(твоё)</span></td><td>deine <span class="tr">(твои)</span></td></tr>
+          <tr><td>er/es <span class="tr">(он/оно)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">en</span></span> <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td><td>sein <span class="tr">(его)</span></td><td>seine <span class="tr">(его)</span></td></tr>
+          <tr><td>sie <span class="tr">(она)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">en</span></span> <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td><td>ihr <span class="tr">(её)</span></td><td>ihre <span class="tr">(её)</span></td></tr>
+          <tr><td>wir <span class="tr">(мы)</span></td><td><span class="tr-anchor" data-tip="(наш)">unser<span class="end-hl">en</span></span> <span class="tr">(наш)</span></td><td>unsere <span class="tr">(наша)</span></td><td>unser <span class="tr">(наше)</span></td><td>unsere <span class="tr">(наши)</span></td></tr>
+          <tr><td>ihr <span class="tr">(вы)</span></td><td><span class="tr-anchor" data-tip="(ваш)">eur<span class="end-hl">en</span></span> <span class="tr">(ваш)</span></td><td>eure <span class="tr">(ваша)</span></td><td>euer <span class="tr">(ваше)</span></td><td>eure <span class="tr">(ваши)</span></td></tr>
+          <tr><td>sie/Sie <span class="tr">(они/Вы)</span></td><td><span class="tr-anchor" data-tip="(их/Ваш)">ihr<span class="end-hl">en</span>/Ihr<span class="end-hl">en</span></span> <span class="tr">(их/Ваш)</span></td><td>ihre/Ihre <span class="tr">(их/Ваша)</span></td><td>ihr/Ihr <span class="tr">(их/Ваше)</span></td><td>ihre/Ihre <span class="tr">(их/Ваши)</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- Dativ (all endings change) -->
+    <div id="poss-dat" class="tab-panel">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Лицо</th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>ich <span class="tr">(я)</span></td><td><span class="tr-anchor" data-tip="(мой)">mein<span class="end-hl">em</span></span> <span class="tr">(мой)</span></td><td><span class="tr-anchor" data-tip="(моя)">mein<span class="end-hl">er</span></span> <span class="tr">(моя)</span></td><td><span class="tr-anchor" data-tip="(моё)">mein<span class="end-hl">em</span></span> <span class="tr">(моё)</span></td><td><span class="tr-anchor" data-tip="(мои)">mein<span class="end-hl">en</span></span> <span class="tr">(мои)</span></td></tr>
+          <tr><td>du <span class="tr">(ты)</span></td><td><span class="tr-anchor" data-tip="(твой)">dein<span class="end-hl">em</span></span> <span class="tr">(твой)</span></td><td><span class="tr-anchor" data-tip="(твоя)">dein<span class="end-hl">er</span></span> <span class="tr">(твоя)</span></td><td><span class="tr-anchor" data-tip="(твоё)">dein<span class="end-hl">em</span></span> <span class="tr">(твоё)</span></td><td><span class="tr-anchor" data-tip="(твои)">dein<span class="end-hl">en</span></span> <span class="tr">(твои)</span></td></tr>
+          <tr><td>er/es <span class="tr">(он/оно)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">em</span></span> <span class="tr">(его)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">er</span></span> <span class="tr">(его)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">em</span></span> <span class="tr">(его)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">en</span></span> <span class="tr">(его)</span></td></tr>
+          <tr><td>sie <span class="tr">(она)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">em</span></span> <span class="tr">(её)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">er</span></span> <span class="tr">(её)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">em</span></span> <span class="tr">(её)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">en</span></span> <span class="tr">(её)</span></td></tr>
+          <tr><td>wir <span class="tr">(мы)</span></td><td><span class="tr-anchor" data-tip="(наш)">unser<span class="end-hl">em</span></span> <span class="tr">(наш)</span></td><td><span class="tr-anchor" data-tip="(наша)">unser<span class="end-hl">er</span></span> <span class="tr">(наша)</span></td><td><span class="tr-anchor" data-tip="(наше)">unser<span class="end-hl">em</span></span> <span class="tr">(наше)</span></td><td><span class="tr-anchor" data-tip="(наши)">unser<span class="end-hl">en</span></span> <span class="tr">(наши)</span></td></tr>
+          <tr><td>ihr <span class="tr">(вы)</span></td><td><span class="tr-anchor" data-tip="(ваш)">eur<span class="end-hl">em</span></span> <span class="tr">(ваш)</span></td><td><span class="tr-anchor" data-tip="(ваша)">eur<span class="end-hl">er</span></span> <span class="tr">(ваша)</span></td><td><span class="tr-anchor" data-tip="(ваше)">eur<span class="end-hl">em</span></span> <span class="tr">(ваше)</span></td><td><span class="tr-anchor" data-tip="(ваши)">eur<span class="end-hl">en</span></span> <span class="tr">(ваши)</span></td></tr>
+          <tr><td>sie/Sie <span class="tr">(они/Вы)</span></td><td><span class="tr-anchor" data-tip="(их/Ваш)">ihr<span class="end-hl">em</span>/Ihr<span class="end-hl">em</span></span> <span class="tr">(их/Ваш)</span></td><td><span class="tr-anchor" data-tip="(их/Ваша)">ihr<span class="end-hl">er</span>/Ihr<span class="end-hl">er</span></span> <span class="tr">(их/Ваша)</span></td><td><span class="tr-anchor" data-tip="(их/Ваше)">ihr<span class="end-hl">em</span>/Ihr<span class="end-hl">em</span></span> <span class="tr">(их/Ваше)</span></td><td><span class="tr-anchor" data-tip="(их/Ваши)">ihr<span class="end-hl">en</span>/Ihr<span class="end-hl">en</span></span> <span class="tr">(их/Ваши)</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- Genitiv (all endings change) -->
+    <div id="poss-gen" class="tab-panel">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Лицо</th><th class="gm">м.р.</th><th class="gf">ж.р.</th><th class="gn">с.р.</th><th>мн.ч.</th></tr></thead>
+        <tbody>
+          <tr><td>ich <span class="tr">(я)</span></td><td><span class="tr-anchor" data-tip="(мой)">mein<span class="end-hl">es</span></span> <span class="tr">(мой)</span></td><td><span class="tr-anchor" data-tip="(моя)">mein<span class="end-hl">er</span></span> <span class="tr">(моя)</span></td><td><span class="tr-anchor" data-tip="(моё)">mein<span class="end-hl">es</span></span> <span class="tr">(моё)</span></td><td><span class="tr-anchor" data-tip="(мои)">mein<span class="end-hl">er</span></span> <span class="tr">(мои)</span></td></tr>
+          <tr><td>du <span class="tr">(ты)</span></td><td><span class="tr-anchor" data-tip="(твой)">dein<span class="end-hl">es</span></span> <span class="tr">(твой)</span></td><td><span class="tr-anchor" data-tip="(твоя)">dein<span class="end-hl">er</span></span> <span class="tr">(твоя)</span></td><td><span class="tr-anchor" data-tip="(твоё)">dein<span class="end-hl">es</span></span> <span class="tr">(твоё)</span></td><td><span class="tr-anchor" data-tip="(твои)">dein<span class="end-hl">er</span></span> <span class="tr">(твои)</span></td></tr>
+          <tr><td>er/es <span class="tr">(он/оно)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">es</span></span> <span class="tr">(его)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">er</span></span> <span class="tr">(его)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">es</span></span> <span class="tr">(его)</span></td><td><span class="tr-anchor" data-tip="(его)">sein<span class="end-hl">er</span></span> <span class="tr">(его)</span></td></tr>
+          <tr><td>sie <span class="tr">(она)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">es</span></span> <span class="tr">(её)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">er</span></span> <span class="tr">(её)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">es</span></span> <span class="tr">(её)</span></td><td><span class="tr-anchor" data-tip="(её)">ihr<span class="end-hl">er</span></span> <span class="tr">(её)</span></td></tr>
+          <tr><td>wir <span class="tr">(мы)</span></td><td><span class="tr-anchor" data-tip="(наш)">unser<span class="end-hl">es</span></span> <span class="tr">(наш)</span></td><td><span class="tr-anchor" data-tip="(наша)">unser<span class="end-hl">er</span></span> <span class="tr">(наша)</span></td><td><span class="tr-anchor" data-tip="(наше)">unser<span class="end-hl">es</span></span> <span class="tr">(наше)</span></td><td><span class="tr-anchor" data-tip="(наши)">unser<span class="end-hl">er</span></span> <span class="tr">(наши)</span></td></tr>
+          <tr><td>ihr <span class="tr">(вы)</span></td><td><span class="tr-anchor" data-tip="(ваш)">eur<span class="end-hl">es</span></span> <span class="tr">(ваш)</span></td><td><span class="tr-anchor" data-tip="(ваша)">eur<span class="end-hl">er</span></span> <span class="tr">(ваша)</span></td><td><span class="tr-anchor" data-tip="(ваше)">eur<span class="end-hl">es</span></span> <span class="tr">(ваше)</span></td><td><span class="tr-anchor" data-tip="(ваши)">eur<span class="end-hl">er</span></span> <span class="tr">(ваши)</span></td></tr>
+          <tr><td>sie/Sie <span class="tr">(они/Вы)</span></td><td><span class="tr-anchor" data-tip="(их/Ваш)">ihr<span class="end-hl">es</span>/Ihr<span class="end-hl">es</span></span> <span class="tr">(их/Ваш)</span></td><td><span class="tr-anchor" data-tip="(их/Ваша)">ihr<span class="end-hl">er</span>/Ihr<span class="end-hl">er</span></span> <span class="tr">(их/Ваша)</span></td><td><span class="tr-anchor" data-tip="(их/Ваше)">ihr<span class="end-hl">es</span>/Ihr<span class="end-hl">es</span></span> <span class="tr">(их/Ваше)</span></td><td><span class="tr-anchor" data-tip="(их/Ваши)">ihr<span class="end-hl">er</span>/Ihr<span class="end-hl">er</span></span> <span class="tr">(их/Ваши)</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
   </div>
 </div>
 
@@ -2303,12 +2364,12 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
   <div class="card-header"><div class="card-title">Предлоги по падежам</div></div>
   <div class="card-content">
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Akkusativ</th><th>Dativ</th><th>Genitiv</th><th>Wechsel (Dat./Akk.)</th></tr></thead>
+      <thead><tr><th>Akkusativ</th><th>Wechsel (Dat./Akk.)</th><th>Dativ</th><th>Genitiv</th></tr></thead>
       <tbody><tr>
         <td>durch <span class="tr">(сквозь)</span> <span class="contr" data-tip="durch + das">durchs</span><br>für <span class="tr">(для)</span> <span class="contr" data-tip="für + das">fürs</span><br>gegen <span class="tr">(против)</span><br>ohne <span class="tr">(без)</span><br>um <span class="tr">(вокруг)</span> <span class="contr" data-tip="um + das">ums</span><br>bis <span class="tr">(до)</span><br>entlang <span class="tr">(вдоль)</span></td>
+        <td>an <span class="tr">(у/на)</span> <span class="contr" data-tip="an + dem">am</span> <span class="contr" data-tip="an + das">ans</span><br>auf <span class="tr">(на)</span> <span class="contr" data-tip="auf + das">aufs</span><br>hinter <span class="tr">(за)</span><br>in <span class="tr">(в)</span> <span class="contr" data-tip="in + dem">im</span> <span class="contr" data-tip="in + das">ins</span><br>neben <span class="tr">(рядом)</span><br>über <span class="tr">(над/о)</span> <span class="contr" data-tip="über + das">übers</span><br>unter <span class="tr">(под)</span><br>vor <span class="tr">(перед)</span> <span class="contr" data-tip="vor + das">vors</span><br>zwischen <span class="tr">(между)</span></td>
         <td>aus <span class="tr">(из)</span><br>bei <span class="tr">(у)</span> <span class="contr" data-tip="bei + dem">beim</span><br>mit <span class="tr">(с)</span><br>nach <span class="tr">(после/в)</span><br>seit <span class="tr">(с/уже)</span><br>von <span class="tr">(от)</span> <span class="contr" data-tip="von + dem">vom</span><br>zu <span class="tr">(к)</span> <span class="contr" data-tip="zu + dem">zum</span> <span class="contr" data-tip="zu + der">zur</span><br>gegenüber <span class="tr">(напротив)</span><br>außer <span class="tr">(кроме)</span></td>
         <td>wegen <span class="tr">(из-за)</span><br>trotz <span class="tr">(несмотря)</span><br>während <span class="tr">(во время)</span><br>statt <span class="tr">(вместо)</span><br>aufgrund <span class="tr">(на основании)</span><br>innerhalb <span class="tr">(внутри)</span><br>außerhalb <span class="tr">(вне)</span><br>mithilfe <span class="tr">(с помощью)</span></td>
-        <td>an <span class="tr">(у/на)</span> <span class="contr" data-tip="an + dem">am</span> <span class="contr" data-tip="an + das">ans</span><br>auf <span class="tr">(на)</span> <span class="contr" data-tip="auf + das">aufs</span><br>hinter <span class="tr">(за)</span><br>in <span class="tr">(в)</span> <span class="contr" data-tip="in + dem">im</span> <span class="contr" data-tip="in + das">ins</span><br>neben <span class="tr">(рядом)</span><br>über <span class="tr">(над/о)</span> <span class="contr" data-tip="über + das">übers</span><br>unter <span class="tr">(под)</span><br>vor <span class="tr">(перед)</span> <span class="contr" data-tip="vor + das">vors</span><br>zwischen <span class="tr">(между)</span></td>
       </tr></tbody>
     </table></div>
   </div>

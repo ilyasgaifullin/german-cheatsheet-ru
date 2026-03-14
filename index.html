@@ -2376,7 +2376,7 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
       <thead><tr><th>Akkusativ</th><th><span class="prep-tip" data-tip="Wohin? (куда?) → Akkusativ&#10;Wo? (где?) → Dativ">Wechsel (Dat./Akk.)</span></th><th>Dativ</th><th>Genitiv</th></tr></thead>
       <tbody><tr>
         <td>durch <span class="tr">(сквозь)</span> <span class="contr" data-tip="durch + das">durchs</span><br>für <span class="tr">(для)</span> <span class="contr" data-tip="für + das">fürs</span><br>gegen <span class="tr">(против)</span><br>ohne <span class="tr">(без)</span><br>um <span class="tr">(вокруг)</span> <span class="contr" data-tip="um + das">ums</span><br>bis <span class="tr">(до)</span><br>entlang <span class="tr">(вдоль)</span></td>
-        <td>an <span class="tr">(у/на)</span> <span class="contr" data-tip="an + dem">am</span> <span class="contr" data-tip="an + das">ans</span><br>auf <span class="tr">(на)</span> <span class="contr" data-tip="auf + das">aufs</span><br>hinter <span class="tr">(за)</span><br>in <span class="tr">(в)</span> <span class="contr" data-tip="in + dem">im</span> <span class="contr" data-tip="in + das">ins</span><br>neben <span class="tr">(рядом)</span><br>über <span class="tr">(над/о)</span> <span class="contr" data-tip="über + das">übers</span><br>unter <span class="tr">(под)</span><br>vor <span class="tr">(перед)</span> <span class="contr" data-tip="vor + das">vors</span><br>zwischen <span class="tr">(между)</span></td>
+        <td><span class="tr-anchor" data-tip="у/на (верт. поверхность)&#10;у / к / в&#10;am + Dat.: дни недели, даты">an</span> <span class="tr">(у/на)</span> <span class="contr" data-tip="an + dem">am</span> <span class="contr" data-tip="an + das">ans</span><br><span class="tr-anchor" data-tip="на (горизонт. поверхность)">auf</span> <span class="tr">(на)</span> <span class="contr" data-tip="auf + das">aufs</span><br>hinter <span class="tr">(позади/за)</span><br><span class="tr-anchor" data-tip="в (внутри)&#10;на (в процессе)&#10;in + Dat. = через (буд. время)">in</span> <span class="tr">(в)</span> <span class="contr" data-tip="in + dem">im</span> <span class="contr" data-tip="in + das">ins</span><br>neben <span class="tr">(рядом/около)</span><br>über <span class="tr">(над/о)</span> <span class="contr" data-tip="über + das">übers</span><br>unter <span class="tr">(под)</span><br><span class="tr-anchor" data-tip="перед / до&#10;vor + Dat. = … тому назад">vor</span> <span class="tr">(перед/до)</span> <span class="contr" data-tip="vor + das">vors</span><br>zwischen <span class="tr">(между)</span></td>
         <td>aus <span class="tr">(из)</span><br>bei <span class="tr">(у)</span> <span class="contr" data-tip="bei + dem">beim</span><br>mit <span class="tr">(с)</span><br>nach <span class="tr">(после/в)</span><br>seit <span class="tr">(с/уже)</span><br>von <span class="tr">(от)</span> <span class="contr" data-tip="von + dem">vom</span><br>zu <span class="tr">(к)</span> <span class="contr" data-tip="zu + dem">zum</span> <span class="contr" data-tip="zu + der">zur</span><br>gegenüber <span class="tr">(напротив)</span><br>außer <span class="tr">(кроме)</span></td>
         <td>wegen <span class="tr">(из-за)</span><br>trotz <span class="tr">(несмотря)</span><br>während <span class="tr">(во время)</span><br>statt <span class="tr">(вместо)</span><br>aufgrund <span class="tr">(на основании)</span><br>innerhalb <span class="tr">(внутри)</span><br>außerhalb <span class="tr">(вне)</span><br>mithilfe <span class="tr">(с помощью)</span></td>
       </tr></tbody>
@@ -2716,6 +2716,16 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     const panel = document.getElementById(panelId);
     if (panel) panel.classList.add('tab-active');
   }
+</script>
+
+<!-- Agentation toolbar (dev/test only) -->
+<div id="agentation-root"></div>
+<script type="module">
+  import React from 'https://esm.sh/react@19.2.4';
+  import { createRoot } from 'https://esm.sh/react-dom@19.2.4/client?deps=react@19.2.4';
+  import { Agentation } from 'https://esm.sh/agentation@2.3.2?deps=react@19.2.4,react-dom@19.2.4';
+  const root = createRoot(document.getElementById('agentation-root'));
+  root.render(React.createElement(Agentation));
 </script>
 </body>
 </html>

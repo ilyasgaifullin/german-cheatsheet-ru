@@ -118,12 +118,18 @@ aside {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow-y: auto;
-  padding: 24px 0 48px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   font-size: 12.5px;
+  transition: width .25s cubic-bezier(.4,0,.2,1), min-width .25s cubic-bezier(.4,0,.2,1), padding .25s, border-width .25s;
+}
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 0 8px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
-  transition: width .25s cubic-bezier(.4,0,.2,1), min-width .25s cubic-bezier(.4,0,.2,1), padding .25s, border-width .25s;
 }
 /* Desktop sidebar collapsed state */
 body.sidebar-hidden aside {
@@ -192,7 +198,7 @@ main {
   margin-bottom: 24px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 6px;
   flex-wrap: nowrap;
 }
@@ -559,14 +565,12 @@ footer {
 
 /* ── Sidebar controls (bottom) ── */
 .sidebar-controls {
-  position: sticky;
-  bottom: 0;
   background: var(--background);
   border-top: 1px solid var(--border);
   padding: 8px 12px;
   display: flex;
   gap: 4px;
-  margin-top: 12px;
+  flex-shrink: 0;
 }
 [data-theme="dark"] .sidebar-controls { background: oklch(0.17 0.005 285.823); }
 .sc-btn {
@@ -584,24 +588,18 @@ footer {
 .sc-btn:hover { background: var(--accent); color: var(--foreground); }
 .sc-btn.sc-active { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
 
-/* ── Floating sidebar-open button (desktop, when sidebar hidden) ── */
+/* ── Sidebar-open button (in page header, desktop only) ── */
 .sidebar-open-btn {
   display: none;
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  z-index: 50;
-  width: 18px; height: 48px;
+  width: 30px; height: 30px;
   border: 1px solid var(--border);
-  border-left: none;
-  border-radius: 0 6px 6px 0;
-  background: var(--background);
+  border-radius: var(--radius);
+  background: transparent;
   cursor: pointer;
   align-items: center; justify-content: center;
   color: var(--muted-fg);
   transition: background .15s, color .15s;
-  box-shadow: 2px 0 8px rgb(0 0 0 / .07);
+  flex-shrink: 0;
 }
 .sidebar-open-btn:hover { background: var(--accent); color: var(--foreground); }
 body.sidebar-hidden .sidebar-open-btn { display: flex; }
@@ -1008,6 +1006,7 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
 
 <!-- ═══ SIDEBAR ═══ -->
 <aside id="sidebar">
+<div class="sidebar-scroll">
   <div class="sidebar-header">
     <h2>Содержание</h2>
     <button class="sidebar-close-btn" id="sidebarToggleBtn" onclick="handleSidebarClose()" title="Скрыть меню" aria-label="Скрыть меню">
@@ -1072,13 +1071,13 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     <li><a href="#quick2">38 · Союзы</a></li>
   </ul></details></li>
 </ul>
+</div><!-- /.sidebar-scroll -->
   <div class="sidebar-controls">
     <button class="sc-btn" id="darkBtn" onclick="toggleDark()" title="Тёмная / светлая тема"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
     <button class="sc-btn" id="trBtn" onclick="toggleTr()" title="Скрыть / показать переводы"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
     <button class="sc-btn" id="compactBtn" onclick="toggleCompact()" title="Компактный режим"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg></button>
   </div>
 </aside>
-<button class="sidebar-open-btn" onclick="toggleSidebar()" title="Открыть меню" aria-label="Открыть меню"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
 <div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
 
 <!-- ═══ MAIN ═══ -->
@@ -1086,6 +1085,7 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
 
 
 <header class="page-header">
+  <button class="sidebar-open-btn" onclick="toggleSidebar()" title="Открыть меню" aria-label="Открыть меню"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <span class="page-title">Немецкий · Шпаргалки</span>
   <div class="search-wrap">
     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -1116,9 +1116,9 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
       <thead><tr><th class="gm">der (м.р.)</th><th class="gf">die (ж.р.)</th><th class="gn">das (с.р.)</th></tr></thead>
       <tbody>
         <tr>
-          <td>-er, -ling, -ismus</td>
-          <td>-ung, -heit, -keit, -schaft, -tion, -tät, -ik</td>
-          <td>-chen, -lein, -ment, -um, -tum</td>
+          <td><span class="tr-anchor" data-tip="der Lehrer (учитель)&#10;der Fahrer (водитель)&#10;der Computer (компьютер)">-er</span>, <span class="tr-anchor" data-tip="der Frühling (весна)&#10;der Lehrling (ученик)&#10;der Flüchtling (беженец)">-ling</span>, <span class="tr-anchor" data-tip="der Tourismus (туризм)&#10;der Optimismus (оптимизм)&#10;der Realismus (реализм)">-ismus</span></td>
+          <td><span class="tr-anchor" data-tip="die Zeitung (газета)&#10;die Wohnung (квартира)&#10;die Meinung (мнение)">-ung</span>, <span class="tr-anchor" data-tip="die Freiheit (свобода)&#10;die Gesundheit (здоровье)&#10;die Schönheit (красота)">-heit</span>, <span class="tr-anchor" data-tip="die Möglichkeit (возможность)&#10;die Geschwindigkeit (скорость)&#10;die Fähigkeit (способность)">-keit</span>, <span class="tr-anchor" data-tip="die Mannschaft (команда)&#10;die Freundschaft (дружба)&#10;die Gesellschaft (общество)">-schaft</span>, <span class="tr-anchor" data-tip="die Station (станция)&#10;die Nation (нация)&#10;die Produktion (производство)">-tion</span>, <span class="tr-anchor" data-tip="die Universität (университет)&#10;die Qualität (качество)&#10;die Realität (реальность)">-tät</span>, <span class="tr-anchor" data-tip="die Musik (музыка)&#10;die Politik (политика)&#10;die Grammatik (грамматика)">-ik</span></td>
+          <td><span class="tr-anchor" data-tip="das Mädchen (девочка)&#10;das Häuschen (домик)&#10;das Kätzchen (котёнок)">-chen</span>, <span class="tr-anchor" data-tip="das Büchlein (книжечка)&#10;das Männlein (человечек)&#10;das Kindlein (дитя)">-lein</span>, <span class="tr-anchor" data-tip="das Dokument (документ)&#10;das Instrument (инструмент)&#10;das Parlament (парламент)">-ment</span>, <span class="tr-anchor" data-tip="das Museum (музей)&#10;das Zentrum (центр)&#10;das Datum (дата)">-um</span>, <span class="tr-anchor" data-tip="das Wachstum (рост)&#10;das Eigentum (собственность)&#10;das Altertum (древность)">-tum</span></td>
         </tr>
       </tbody>
     </table></div>

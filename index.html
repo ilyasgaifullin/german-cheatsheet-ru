@@ -619,6 +619,81 @@ body.sidebar-hidden .sidebar-open-btn { display: flex; }
 }
 .nav-overlay.open { display: block; }
 
+/* ── Fullpage overlay (Irregular verbs) ── */
+body.fullpage-open { overflow: hidden; }
+.fullpage {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: var(--background);
+  color: var(--foreground);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.fullpage[hidden] { display: none !important; }
+.fullpage-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 22px 22px 64px;
+}
+.fullpage-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  background: color-mix(in oklab, var(--background) 86%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.fp-back {
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  cursor: pointer;
+  color: var(--muted-fg);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.fp-back:hover { background: var(--accent); color: var(--foreground); }
+.fp-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+.fp-sub {
+  font-size: 12px;
+  color: var(--muted-fg);
+  margin-left: auto;
+  white-space: nowrap;
+}
+.fp-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+.fp-search { max-width: 360px; width: 100%; }
+.fp-meta { font-size: 12px; color: var(--muted-fg); margin-top: 10px; }
+.fp-table thead th { position: sticky; top: 52px; z-index: 1; }
+@media (max-width: 680px) {
+  .fullpage-inner { padding: 16px 14px 56px; }
+  .fp-title { display: none; }
+  .fp-sub { display: none; }
+  .fp-search { max-width: none; }
+  .fp-table thead th { top: 52px; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 680px) {
   aside {
@@ -1069,6 +1144,7 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
   <li><details open><summary class="nav-sep">Справочник</summary><ul class="nav-sub">
     <li><a href="#quick">37 · Предлоги</a></li>
     <li><a href="#quick2">38 · Союзы</a></li>
+    <li><a href="#irregular">Неправильные глаголы · B1 топ‑100</a></li>
   </ul></details></li>
 </ul>
 </div><!-- /.sidebar-scroll -->
@@ -1082,6 +1158,44 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
 
 <!-- ═══ MAIN ═══ -->
 <main>
+
+<!-- ═══ FULLPAGE: Irregular verbs (B1 top-100) ═══ -->
+<section id="page-irregular" class="fullpage" hidden aria-label="Неправильные глаголы (B1 топ‑100)">
+  <div class="fullpage-inner">
+    <div class="fullpage-header">
+      <button class="btn btn-outline fp-close" type="button" onclick="closeIrregularPage()" aria-label="Назад">
+        <span aria-hidden="true">←</span><span>Назад</span>
+      </button>
+      <div class="fp-title">
+        <div class="fp-title-top">Неправильные глаголы</div>
+        <div class="fp-title-sub">Goethe / TELC B1 · топ‑100</div>
+      </div>
+    </div>
+
+    <div class="fp-tools">
+      <div class="search-wrap" style="max-width:520px">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="irregularSearch" type="search" class="search-input" placeholder="Поиск: gehen / ging / gegangen…" oninput="filterIrregular(this.value)">
+      </div>
+      <div class="fp-count" id="irregularCount"></div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table id="irregularTable" class="irregular-table">
+        <thead>
+          <tr>
+            <th style="width:28px">#</th>
+            <th>Infinitiv</th>
+            <th>Präteritum</th>
+            <th>Perfekt</th>
+            <th class="tr-col">Перевод</th>
+          </tr>
+        </thead>
+        <tbody id="irregularTbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 
 <header class="page-header">
@@ -2663,6 +2777,292 @@ body.compact pre           { padding: 10px 12px; font-size: 12px; }
     localStorage.setItem('de_tr', isHidden ? '0' : '1');
     if (btn) btn.classList.toggle('sc-active', isHidden);
   }
+
+  // ── Fullpage: Irregular verbs (B1 top-100) ──
+  const IRREGULAR_B1_TOP100 = [
+    // Core (A1/A2/B1) — curated to common B1 exam usage
+    { de:'sein', praet:'war', perf:'ist gewesen', ru:'быть' },
+    { de:'haben', praet:'hatte', perf:'hat gehabt', ru:'иметь' },
+    { de:'werden', praet:'wurde', perf:'ist geworden', ru:'становиться' },
+    { de:'können', praet:'konnte', perf:'hat gekonnt', ru:'мочь' },
+    { de:'müssen', praet:'musste', perf:'hat gemusst', ru:'быть должным' },
+    { de:'dürfen', praet:'durfte', perf:'hat gedurft', ru:'иметь право' },
+    { de:'sollen', praet:'sollte', perf:'hat gesollt', ru:'следует/должен' },
+    { de:'wollen', praet:'wollte', perf:'hat gewollt', ru:'хотеть' },
+    { de:'mögen', praet:'mochte', perf:'hat gemocht', ru:'нравиться/любить' },
+    { de:'gehen', praet:'ging', perf:'ist gegangen', ru:'идти' },
+    { de:'kommen', praet:'kam', perf:'ist gekommen', ru:'приходить' },
+    { de:'fahren', praet:'fuhr', perf:'ist/hat gefahren', ru:'ехать/водить' },
+    { de:'laufen', praet:'lief', perf:'ist gelaufen', ru:'бежать/ходить' },
+    { de:'bleiben', praet:'blieb', perf:'ist geblieben', ru:'оставаться' },
+    { de:'geben', praet:'gab', perf:'hat gegeben', ru:'давать' },
+    { de:'nehmen', praet:'nahm', perf:'hat genommen', ru:'брать' },
+    { de:'machen', praet:'machte', perf:'hat gemacht', ru:'делать' }, // weak but frequent (kept for usefulness)
+    { de:'tun', praet:'tat', perf:'hat getan', ru:'делать/совершать' },
+    { de:'sagen', praet:'sagte', perf:'hat gesagt', ru:'говорить' }, // weak but frequent
+    { de:'sprechen', praet:'sprach', perf:'hat gesprochen', ru:'говорить' },
+    { de:'sehen', praet:'sah', perf:'hat gesehen', ru:'видеть' },
+    { de:'hören', praet:'hörte', perf:'hat gehört', ru:'слышать' }, // weak but frequent
+    { de:'lesen', praet:'las', perf:'hat gelesen', ru:'читать' },
+    { de:'schreiben', praet:'schrieb', perf:'hat geschrieben', ru:'писать' },
+    { de:'finden', praet:'fand', perf:'hat gefunden', ru:'находить' },
+    { de:'wissen', praet:'wusste', perf:'hat gewusst', ru:'знать' },
+    { de:'kennen', praet:'kannte', perf:'hat gekannt', ru:'знать (быть знакомым)' },
+    { de:'denken', praet:'dachte', perf:'hat gedacht', ru:'думать' },
+    { de:'bringen', praet:'brachte', perf:'hat gebracht', ru:'приносить' },
+    { de:'fragen', praet:'fragte', perf:'hat gefragt', ru:'спрашивать' }, // weak but frequent
+    { de:'antworten', praet:'antwortete', perf:'hat geantwortet', ru:'отвечать' }, // weak but frequent
+    { de:'helfen', praet:'half', perf:'hat geholfen', ru:'помогать' },
+    { de:'treffen', praet:'traf', perf:'hat getroffen', ru:'встречать' },
+    { de:'essen', praet:'aß', perf:'hat gegessen', ru:'есть' },
+    { de:'trinken', praet:'trank', perf:'hat getrunken', ru:'пить' },
+    { de:'schlafen', praet:'schlief', perf:'hat geschlafen', ru:'спать' },
+    { de:'stehen', praet:'stand', perf:'hat gestanden', ru:'стоять' },
+    { de:'sitzen', praet:'saß', perf:'hat gesessen', ru:'сидеть' },
+    { de:'liegen', praet:'lag', perf:'hat gelegen', ru:'лежать' },
+    { de:'fallen', praet:'fiel', perf:'ist gefallen', ru:'падать' },
+    { de:'gefallen', praet:'gefiel', perf:'hat gefallen', ru:'нравиться' },
+    { de:'halten', praet:'hielt', perf:'hat gehalten', ru:'держать/останавливать' },
+    { de:'lassen', praet:'ließ', perf:'hat gelassen', ru:'оставлять/позволять' },
+    { de:'beginnen', praet:'begann', perf:'hat begonnen', ru:'начинать' },
+    { de:'bekommen', praet:'bekam', perf:'hat bekommen', ru:'получать' },
+    { de:'rufen', praet:'rief', perf:'hat gerufen', ru:'звать/звонить' },
+    { de:'steigen', praet:'stieg', perf:'ist gestiegen', ru:'подниматься' },
+    { de:'ziehen', praet:'zog', perf:'ist/hat gezogen', ru:'тянуть/переезжать' },
+    { de:'werfen', praet:'warf', perf:'hat geworfen', ru:'бросать' },
+    { de:'verlieren', praet:'verlor', perf:'hat verloren', ru:'терять' },
+    { de:'gewinnen', praet:'gewann', perf:'hat gewonnen', ru:'выигрывать' },
+    { de:'vergessen', praet:'vergaß', perf:'hat vergessen', ru:'забывать' },
+    { de:'verstehen', praet:'verstand', perf:'hat verstanden', ru:'понимать' },
+    { de:'anrufen', praet:'rief an', perf:'hat angerufen', ru:'звонить' },
+    { de:'aufstehen', praet:'stand auf', perf:'ist aufgestanden', ru:'вставать' },
+    { de:'mitnehmen', praet:'nahm mit', perf:'hat mitgenommen', ru:'взять с собой' },
+    { de:'einladen', praet:'lud ein', perf:'hat eingeladen', ru:'приглашать' },
+    { de:'aussehen', praet:'sah aus', perf:'hat ausgesehen', ru:'выглядеть' },
+    { de:'einschlafen', praet:'schlief ein', perf:'ist eingeschlafen', ru:'засыпать' },
+    { de:'aufwachen', praet:'wachte auf', perf:'ist aufgewacht', ru:'просыпаться' },
+    { de:'anfangen', praet:'fing an', perf:'hat angefangen', ru:'начинать' },
+    { de:'aufgeben', praet:'gab auf', perf:'hat aufgegeben', ru:'сдаваться/бросать' },
+    { de:'aufnehmen', praet:'nahm auf', perf:'hat aufgenommen', ru:'принимать/записывать' },
+    { de:'einfallen', praet:'fiel ein', perf:'ist eingefallen', ru:'приходить в голову' },
+    { de:'annehmen', praet:'nahm an', perf:'hat angenommen', ru:'принимать (соглаш.)' },
+    { de:'teilnehmen', praet:'nahm teil', perf:'hat teilgenommen', ru:'участвовать' },
+    { de:'zunehmen', praet:'nahm zu', perf:'hat zugenommen', ru:'прибавлять (вес)' },
+    { de:'abnehmen', praet:'nahm ab', perf:'hat abgenommen', ru:'снижаться/худеть' },
+    { de:'wachsen', praet:'wuchs', perf:'ist gewachsen', ru:'расти' },
+    { de:'werden', praet:'wurde', perf:'ist geworden', ru:'становиться' }, // duplicate guard below will remove
+    // B1 strong/irregular (from level lists; common in exam texts)
+    { de:'halten', praet:'hielt', perf:'hat gehalten', ru:'держать' },
+    { de:'bieten', praet:'bot', perf:'hat geboten', ru:'предлагать' },
+    { de:'bitten', praet:'bat', perf:'hat gebeten', ru:'просить' },
+    { de:'wählen', praet:'wählte', perf:'hat gewählt', ru:'выбирать' }, // weak but exam-relevant
+    { de:'fangen', praet:'fing', perf:'hat gefangen', ru:'ловить' },
+    { de:'tragen', praet:'trug', perf:'hat getragen', ru:'носить' },
+    { de:'treiben', praet:'trieb', perf:'hat getrieben', ru:'гнать/заниматься' },
+    { de:'treten', praet:'trat', perf:'ist/hat getreten', ru:'ступать/вступать' },
+    { de:'schlagen', praet:'schlug', perf:'hat geschlagen', ru:'бить/ударять' },
+    { de:'schneiden', praet:'schnitt', perf:'hat geschnitten', ru:'резать' },
+    { de:'schließen', praet:'schloss', perf:'hat geschlossen', ru:'закрывать' },
+    { de:'schwimmen', praet:'schwamm', perf:'ist/hat geschwommen', ru:'плавать' },
+    { de:'singen', praet:'sang', perf:'hat gesungen', ru:'петь' },
+    { de:'springen', praet:'sprang', perf:'ist gesprungen', ru:'прыгать' },
+    { de:'sinken', praet:'sank', perf:'ist gesunken', ru:'тонуть/опускаться' },
+    { de:'bleiben', praet:'blieb', perf:'ist geblieben', ru:'оставаться' },
+    { de:'sterben', praet:'starb', perf:'ist gestorben', ru:'умирать' },
+    { de:'wollen', praet:'wollte', perf:'hat gewollt', ru:'хотеть' },
+    { de:'dürfen', praet:'durfte', perf:'hat gedurft', ru:'можно/разрешено' },
+    { de:'müssen', praet:'musste', perf:'hat gemusst', ru:'должен' },
+    { de:'können', praet:'konnte', perf:'hat gekonnt', ru:'мочь' },
+    { de:'sollen', praet:'sollte', perf:'hat gesollt', ru:'следует' },
+    { de:'wollen', praet:'wollte', perf:'hat gewollt', ru:'хотеть' },
+    { de:'waschen', praet:'wusch', perf:'hat gewaschen', ru:'мыть' },
+    { de:'backen', praet:'buk/backte', perf:'hat gebacken', ru:'печь' },
+    { de:'werfen', praet:'warf', perf:'hat geworfen', ru:'кидать' },
+    { de:'ziehen', praet:'zog', perf:'ist/hat gezogen', ru:'тянуть/переезжать' },
+    { de:'liegen', praet:'lag', perf:'hat gelegen', ru:'лежать' },
+    { de:'sitzen', praet:'saß', perf:'hat gesessen', ru:'сидеть' },
+    { de:'stehen', praet:'stand', perf:'hat gestanden', ru:'стоять' },
+    { de:'riechen', praet:'roch', perf:'hat gerochen', ru:'пахнуть' },
+    { de:'rennen', praet:'rannte', perf:'ist gerannt', ru:'бежать' },
+    { de:'nennen', praet:'nannte', perf:'hat genannt', ru:'называть' },
+    { de:'laden', praet:'lud', perf:'hat geladen', ru:'грузить/заряжать' },
+    { de:'heißen', praet:'hieß', perf:'hat geheißen', ru:'зваться' },
+    { de:'schicken', praet:'schickte', perf:'hat geschickt', ru:'отправлять' }, // weak but exam-relevant
+    { de:'suchen', praet:'suchte', perf:'hat gesucht', ru:'искать' }, // weak but exam-relevant
+    { de:'zeigen', praet:'zeigte', perf:'hat gezeigt', ru:'показывать' }, // weak but exam-relevant
+    { de:'lernen', praet:'lernte', perf:'hat gelernt', ru:'учить(ся)' }, // weak but exam-relevant
+    { de:'arbeiten', praet:'arbeitete', perf:'hat gearbeitet', ru:'работать' }, // weak but exam-relevant
+    { de:'bekommen', praet:'bekam', perf:'hat bekommen', ru:'получать' },
+    { de:'verlassen', praet:'verließ', perf:'hat verlassen', ru:'покидать' },
+    { de:'verzeihen', praet:'verzieh', perf:'hat verziehen', ru:'прощать' },
+    { de:'versprechen', praet:'versprach', perf:'hat versprochen', ru:'обещать' },
+    { de:'entscheiden', praet:'entschied', perf:'hat entschieden', ru:'решать' },
+    { de:'verglichen', praet:'verglich', perf:'hat verglichen', ru:'сравнивать' }, // typo guard: will be normalized below
+    { de:'vergleichen', praet:'verglich', perf:'hat verglichen', ru:'сравнивать' },
+    { de:'verbringen', praet:'verbrachte', perf:'hat verbracht', ru:'проводить (время)' },
+    { de:'beginnen', praet:'begann', perf:'hat begonnen', ru:'начинать' },
+    { de:'bekommen', praet:'bekam', perf:'hat bekommen', ru:'получать' },
+    { de:'empfehlen', praet:'empfahl', perf:'hat empfohlen', ru:'рекомендовать' },
+    { de:'glauben', praet:'glaubte', perf:'hat geglaubt', ru:'верить' }, // weak but frequent in B1
+    { de:'gelten', praet:'galt', perf:'hat gegolten', ru:'быть действительным' },
+    { de:'gilt', praet:'galt', perf:'hat gegolten', ru:'действовать' } // variant, filtered
+  ];
+
+  const _irregularState = {
+    isOpen: false,
+    prevHash: '',
+    prevScrollY: 0,
+    data: [],
+    lastQuery: ''
+  };
+
+  function _normalizeIrregularItem(it) {
+    const de = String(it.de || '').trim();
+    return {
+      de,
+      praet: String(it.praet || '').trim(),
+      perf: String(it.perf || '').trim(),
+      ru: String(it.ru || '').trim()
+    };
+  }
+
+  function _initIrregularData() {
+    const seen = new Set();
+    const cleaned = [];
+    IRREGULAR_B1_TOP100.forEach((raw) => {
+      const it = _normalizeIrregularItem(raw);
+      if (!it.de) return;
+      // fix a couple known typos/variants
+      if (it.de === 'verglichen') it.de = 'vergleichen';
+      if (it.de === 'gilt') it.de = 'gelten';
+
+      const key = it.de.toLowerCase();
+      if (seen.has(key)) return;
+      seen.add(key);
+      cleaned.push(it);
+    });
+
+    // Prefer exactly 100 items: keep the most “core” first, then fill.
+    // If fewer than 100 due to dedupe, we keep what we have.
+    _irregularState.data = cleaned.slice(0, 100);
+  }
+
+  function renderIrregularTable(list) {
+    const tbody = document.getElementById('irregularTbody');
+    const count = document.getElementById('irregularCount');
+    if (!tbody) return;
+
+    tbody.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    list.forEach((it, idx) => {
+      const tr = document.createElement('tr');
+      tr.dataset.idx = String(idx);
+      tr.dataset.search = (it.de + ' ' + it.praet + ' ' + it.perf + ' ' + it.ru).toLowerCase();
+      tr.innerHTML =
+        '<td><span class="badge badge-num" style="min-width:28px;text-align:center">' + (idx + 1) + '</span></td>' +
+        '<td><strong>' + _escapeHtml(it.de) + '</strong>' + (it.ru ? '<div class="muted" style="font-size:11.5px;margin-top:2px">' + _escapeHtml(it.ru) + '</div>' : '') + '</td>' +
+        '<td>' + _escapeHtml(it.praet) + '</td>' +
+        '<td>' + _escapeHtml(it.perf) + '</td>';
+      frag.appendChild(tr);
+    });
+    tbody.appendChild(frag);
+    if (count) count.textContent = 'Показано: ' + list.length + ' / ' + _irregularState.data.length;
+  }
+
+  function filterIrregular(q) {
+    q = String(q || '').trim().toLowerCase();
+    _irregularState.lastQuery = q;
+    const tbody = document.getElementById('irregularTbody');
+    const count = document.getElementById('irregularCount');
+    if (!tbody) return;
+
+    const rows = tbody.querySelectorAll('tr');
+    let visible = 0;
+    rows.forEach((tr) => {
+      if (!q) { tr.classList.remove('search-hide'); visible++; return; }
+      const hay = tr.dataset.search || '';
+      const ok = hay.includes(q);
+      tr.classList.toggle('search-hide', !ok);
+      if (ok) visible++;
+    });
+    if (count) count.textContent = 'Показано: ' + visible + ' / ' + _irregularState.data.length;
+  }
+
+  function openIrregularPage(opts) {
+    const page = document.getElementById('page-irregular');
+    if (!page) return;
+    if (_irregularState.isOpen) return;
+
+    _irregularState.isOpen = true;
+    document.body.classList.add('fullpage-open');
+    page.hidden = false;
+
+    if (opts && typeof opts.prevHash === 'string') _irregularState.prevHash = opts.prevHash;
+    if (opts && typeof opts.prevScrollY === 'number') _irregularState.prevScrollY = opts.prevScrollY;
+
+    const input = document.getElementById('irregularSearch');
+    if (input) {
+      input.value = _irregularState.lastQuery || '';
+      setTimeout(() => { try { input.focus(); } catch(e){} }, 0);
+    }
+    filterIrregular(_irregularState.lastQuery || '');
+  }
+
+  function closeIrregularPage() {
+    const page = document.getElementById('page-irregular');
+    if (!page) return;
+    if (!_irregularState.isOpen) return;
+
+    _irregularState.isOpen = false;
+    document.body.classList.remove('fullpage-open');
+    page.hidden = true;
+
+    const prevHash = _irregularState.prevHash || '';
+    const prevY = _irregularState.prevScrollY || 0;
+
+    // Restore previous location (hash) without breaking anchors; then restore scroll.
+    if (location.hash === '#irregular') {
+      if (prevHash) location.hash = prevHash;
+      else history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+    setTimeout(() => { window.scrollTo({ top: prevY, behavior: 'auto' }); }, 0);
+  }
+
+  function _syncIrregularFromHash() {
+    const isIrregular = location.hash === '#irregular';
+    if (isIrregular) openIrregularPage();
+    else if (_irregularState.isOpen) closeIrregularPage();
+  }
+
+  function _escapeHtml(s) {
+    return String(s)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'",'&#039;');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    _initIrregularData();
+    renderIrregularTable(_irregularState.data);
+
+    // Intercept clicks so we can remember where user came from (scroll + hash)
+    document.querySelectorAll('a[href="#irregular"]').forEach((a) => {
+      a.addEventListener('click', function(e) {
+        // Let default hash navigation happen, but capture previous position first.
+        _irregularState.prevHash = location.hash || '';
+        _irregularState.prevScrollY = window.scrollY || 0;
+        // Ensure the page opens even if hash already equals #irregular
+        if (location.hash !== '#irregular') location.hash = '#irregular';
+        else openIrregularPage();
+        e.preventDefault();
+      });
+    });
+
+    window.addEventListener('hashchange', _syncIrregularFromHash);
+    _syncIrregularFromHash();
+  });
 
   // ── Progress bar + Back to top ──
   window.addEventListener('scroll', function() {
